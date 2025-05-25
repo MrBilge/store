@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import BasketSheet from "./BasketSheet";
 import { useBasket } from "@/context/BasketContext";
+import { formatPrice } from "@/lib/utils";
 
 export default function Card({ data }: any) {
   const [openBasket, setOpenBasket] = useState(false);
@@ -22,9 +23,9 @@ export default function Card({ data }: any) {
             key={index}
           >
             <img className="w-max max-w-3xs" src={item.src} />
-            <div className="flex justify-between">
+            <div className="flex justify-between text-sm">
               <p>{item.name}</p>
-              <p>{item.price}TL</p>
+              <p>{formatPrice(item.price)}</p>
             </div>
             <Button
               onClick={() => handleAddToBasket(item)}

@@ -21,7 +21,7 @@ export default function SideBar() {
   ];
 
   return (
-    <nav className="bg-cyan-200 w-1/6">
+    <nav className="bg-gray-100 w-1/6">
       {menuItem.map((item: any, index: any) => (
         <div key={index} className="space-y-10 ml-5 mt-10">
           <Link  href={item.path}>
