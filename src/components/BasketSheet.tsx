@@ -18,7 +18,7 @@ export default function BasketSheet({ open, setOpen }: any) {
 
   return (
     <Sheet onOpenChange={setOpen} open={open}>
-      <SheetContent className="h-dvh w-full ">
+      <SheetContent className="h-dvh w-full pt-10">
         <SheetHeader>
           <SheetTitle className="ml-5">Sepetim</SheetTitle>
         </SheetHeader>
