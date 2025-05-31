@@ -11,6 +11,7 @@ type BasketItem = {
 type BasketContextType = {
   basket: BasketItem[];
   addToBasket: (item: BasketItem) => void;
+  deleteItem: (itemId : any) => void;
 };
 
 const BasketContext = createContext<BasketContextType | undefined>(undefined);
@@ -42,8 +43,12 @@ export const BasketProvider = ({ children }: { children: ReactNode }) => {
     setBasket((prev) => [...prev, item]);
   };
 
+const deleteItem = (itemId : any) => {
+  setBasket((prev) => prev.filter((item) => item.id !==  itemId));
+};
+
   return (
-    <BasketContext.Provider value={{ basket, addToBasket }}>
+    <BasketContext.Provider value={{ deleteItem,   basket, addToBasket }}>
       {children}
     </BasketContext.Provider>
   );
