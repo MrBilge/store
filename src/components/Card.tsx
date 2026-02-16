@@ -16,27 +16,22 @@ export default function Card({ data }: any) {
 
   return (
     <>
-      <div className="flex  flex-wrap gap-10">
-        {data.map((item: any, index: any) => (
-          <div
-            className="p-5 border-2 border-slate-300 rounded-2xl"
-            key={index}
-          >
-            <img className="w-max max-w-3xs" src={item.src} />
-            <div className="flex justify-between text-sm">
-              <p>{item.name}</p>
-              <p>{formatPrice(item.price)}</p>
-            </div>
-            <Button
-              onClick={() => handleAddToBasket(item)}
-              variant="outline"
-              className="w-full mt-5 cursor-pointer"
-            >
-              Sepete Ekle
-            </Button>
+      {data.map((item: any, index: any) => (
+        <div className="p-5 border-2 border-slate-300 rounded-2xl" key={index}>
+          <img className="w-max" src={item.src} />
+          <div className="flex justify-between text-sm">
+            <p>{item.name}</p>
+            <p>{formatPrice(item.price)}</p>
           </div>
-        ))}
-      </div>
+          <Button
+            onClick={() => handleAddToBasket(item)}
+            variant="outline"
+            className="w-full mt-5 cursor-pointer"
+          >
+            Sepete Ekle
+          </Button>
+        </div>
+      ))}
 
       <BasketSheet open={openBasket} setOpen={setOpenBasket} />
     </>

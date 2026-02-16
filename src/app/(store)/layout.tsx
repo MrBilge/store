@@ -8,13 +8,13 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="h-dvh flex flex-col">
+    <div className="h-dvh flex flex-col overflow-y-hidden ">
       <TopBar />
-      <div className="flex flex-1 overflow-y-hidden">
-        <SideBar />
-        <div className="mx-10 mt-10 p-10 w-full overflow-y-auto">
-          <BasketProvider> {children}</BasketProvider>
-        </div>
+      <div
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        className=" py-20 px-60 w-full h-full overflow-y-auto bg-gray-100 "
+      >
+        <BasketProvider> {children}</BasketProvider>
       </div>
     </div>
   );
