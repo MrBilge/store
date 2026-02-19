@@ -13,7 +13,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="grid lg:grid-cols-6  xl:grid-cols-6 gap-5 ">
+    <div className="grid lg:grid-cols-4  xl:grid-cols-6 gap-5 ">
       <Card data={data} />
     </div>
   );

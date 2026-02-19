@@ -8,18 +8,20 @@ export default function AllProducts({ setAllKategori }: any) {
   const activeData = categories.find((cat) => cat.title === activeCategory);
   return (
     <div
-      className="flex  absolute top-full left-0   w-full  bg-white text-black z-50 p-2 rounded-lg "
+      className="flex  absolute  top-full  left-5 xl:left-0 -mt-1   w-full  bg-white text-black z-50 p-2 rounded-lg "
       onMouseEnter={() => setAllKategori(true)}
-      onMouseLeave={() => setAllKategori(false)}
+      onMouseLeave={() => {
+        setAllKategori(false);
+        setActiveCategory(null);
+      }}
     >
-      <div className="flex flex-col space-y-2 mt-2 border-r border-slate-400 p-5 ">
+      <div className="flex flex-col space-y-2 mt-2 border-r border-slate-400 p-5 overflow-y-auto max-h-[500px] no-scrollbar ">
         {categories.map((item, index) => {
           return (
             index > 0 && (
               <div
                 onMouseEnter={() => setActiveCategory(item.title)}
-                onMouseLeave={() => setActiveCategory(null)}
-                className={` hover:bg-gray-300 rounded-lg p-2 flex  gap-2`}
+                className={` hover:bg-gray-300 rounded-lg p-2 flex  gap-2   `}
                 key={index}
               >
                 <item.icon className="w-8 h-8 text-orange-400" />

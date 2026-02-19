@@ -277,6 +277,32 @@ export const categories = [
       },
     ],
   },
+  {
+    title: "Cok Satanlar",
+    icon: TrophyIcon,
+    megaMenu: [
+      {
+        title: "Popüler Ürünler",
+        items: [
+          { title: "En Çok Satanlar", path: "/cok-satanlar" },
+          { title: "En Çok Favorilenenler", path: "/favoriler" },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Cok Satanlar",
+    icon: TrophyIcon,
+    megaMenu: [
+      {
+        title: "Popüler Ürünler",
+        items: [
+          { title: "En Çok Satanlar", path: "/cok-satanlar" },
+          { title: "En Çok Favorilenenler", path: "/favoriler" },
+        ],
+      },
+    ],
+  },
 ];
 
 export const women = [
@@ -303,7 +329,7 @@ export default function () {
   const [allKategori, setAllKategori] = useState(false);
 
   return (
-    <div className=" p-2 bg-white text-slate-900 px-60">
+    <div className="w-full p-2 bg-white text-slate-900 xl:px-60">
       <div className="flex justify-between  ">
         <Logo />
         <div className="relative flex flex-col justify-center">
@@ -324,15 +350,17 @@ export default function () {
           </div>
         </div>
       </div>
-      <div className="relative flex justify-center items-center gap-10 mt-5">
+      <div
+        onMouseLeave={() => setAllKategori(false)}
+        className="w-full  relative flex justify-center items-center gap-10 mt-5"
+      >
         {categories.map((item, index) => {
           const allCategori = index === 0;
 
           return (
             <p
               onMouseEnter={() => index === 0 && setAllKategori(true)}
-              onMouseLeave={() => index === 0 && setAllKategori(false)}
-              className={`font-semibold ${allCategori ? "text-red-600" : "text-slate-900 "}`}
+              className={`font-semibold text-sm ${allCategori ? "text-red-600" : "text-slate-900 "}`}
               key={index}
             >
               {item.title}
