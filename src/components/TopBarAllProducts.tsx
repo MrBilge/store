@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { categories } from "./TopBar";
+import { categories } from "@/data/categories";
 import MegaMenu from "./MegaMenu";
 
 export default function AllProducts({ setAllKategori }: any) {
@@ -17,11 +17,12 @@ export default function AllProducts({ setAllKategori }: any) {
     >
       <div className="flex flex-col space-y-2 mt-2 border-r border-slate-400 p-5 overflow-y-auto max-h-[500px] no-scrollbar ">
         {categories.map((item, index) => {
+          const active = item.title === activeCategory;
           return (
             index > 0 && (
               <div
                 onMouseEnter={() => setActiveCategory(item.title)}
-                className={` hover:bg-gray-300 rounded-lg p-2 flex  gap-2   `}
+                className={` hover:bg-gray-300 rounded-lg p-2 flex  gap-2 ${active ? "bg-gray-300" : ""}  `}
                 key={index}
               >
                 <item.icon className="w-8 h-8 text-orange-400" />
@@ -37,6 +38,7 @@ export default function AllProducts({ setAllKategori }: any) {
         {activeData && (
           <MegaMenu
             data={activeData}
+            setAllKategori={setAllKategori}
             onMouseEnter={() => setActiveCategory(activeData.title)}
             onMouseLeave={() => setActiveCategory(null)}
           />

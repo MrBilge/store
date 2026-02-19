@@ -1,5 +1,5 @@
 import Link from "next/link";
-export default function MegaMenu({ data, ...events }: any) {
+export default function MegaMenu({ data, setAllKategori, ...events }: any) {
   return (
     <div
       className=" top-full left-0 w-full bg-white text-black p-10"
@@ -11,7 +11,12 @@ export default function MegaMenu({ data, ...events }: any) {
             <h3 className="font-bold mb-3">{column.title}</h3>
 
             {column.items.map((item: any, idx: any) => (
-              <Link key={idx} href={item.path} className="block mb-2">
+              <Link
+                onClick={() => setAllKategori(false)}
+                key={idx}
+                href={item.path}
+                className="block mb-2"
+              >
                 {item.title}
               </Link>
             ))}
