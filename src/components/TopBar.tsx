@@ -14,6 +14,7 @@ import { useSearch } from "@/context/SearchContext";
 export default function () {
   const [allKategori, setAllKategori] = useState(false);
   const { setSearchValue } = useSearch();
+  const [tempValue, setTempValue] = useState("");
 
   return (
     <div className="w-full p-2 bg-white text-slate-900 xl:px-60">
@@ -23,10 +24,16 @@ export default function () {
           <MagnifyingGlassIcon className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
 
           <input
-            onChange={(e) => setSearchValue(e.target.value)}
-            className="w-[800px]  h-10 bg-gray-100 rounded-2xl text-black placeholder:text-black pl-10"
+            value={tempValue}
+            onChange={(e) => setTempValue(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                setSearchValue(tempValue);
+              }
+            }}
+            className="w-[800px] h-10 bg-gray-100 rounded-2xl text-black placeholder:text-black pl-10"
             placeholder="Ara..."
-          ></input>
+          />
         </div>
 
         <div className="flex justify-center items-center gap-2">

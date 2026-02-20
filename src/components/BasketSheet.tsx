@@ -16,6 +16,8 @@ import Link from "next/link";
 export default function BasketSheet({ open, setOpen }: any) {
   const { basket, deleteItem } = useBasket();
 
+  const totalPrice = basket.reduce((acc, item) => acc + item.price, 0);
+
   return (
     <Sheet onOpenChange={setOpen} open={open}>
       <SheetContent className="h-dvh w-full pt-10">
@@ -41,10 +43,10 @@ export default function BasketSheet({ open, setOpen }: any) {
                 </div>
 
                 <div
-                  onClick={() => deleteItem(item.id)}
-                  className=" flex  bg-gray-400 p-2 w-max h-max rounded-lg "
+                  onClick={() => deleteItem(item.basketItemId)}
+                  className=" flex  bg-gray-300 p-2 w-max h-max rounded-lg "
                 >
-                  <TrashIcon className="h-4 w-4 text-black cursor-pointer" />
+                  <TrashIcon className="h-4 w-4 text-red-500 cursor-pointer" />
                 </div>
               </div>
             ))
@@ -57,7 +59,7 @@ export default function BasketSheet({ open, setOpen }: any) {
             <div className="flex justify-between bg-black p-5 px-10 text-white">
               <div className="text-sm">
                 <p>Ara Toplam</p>
-                <p>Toplam Fiyat</p>
+                <p>{totalPrice} TL</p>
               </div>
               <Link
                 className="flex justify-center items-center space-x-2"

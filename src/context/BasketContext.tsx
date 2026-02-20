@@ -12,8 +12,8 @@ type BasketItem = {
   name: string;
   price: number;
   src: string;
+  basketItemId: string;
 };
-
 type BasketContextType = {
   basket: BasketItem[];
   addToBasket: (item: BasketItem) => void;
@@ -37,11 +37,15 @@ export const BasketProvider = ({ children }: { children: ReactNode }) => {
   }, [basket]);
 
   const addToBasket = (item: BasketItem) => {
-    setBasket((prev) => [...prev, item]);
+    setBasket((prev) => [
+      ...prev,
+      { ...item, basketItemId: crypto.randomUUID() },
+    ]);
   };
-
-  const deleteItem = (itemId: any) => {
-    setBasket((prev) => prev.filter((item) => item.id !== itemId));
+  const deleteItem = (basketItemId: any) => {
+    setBasket((prev) =>
+      prev.filter((item) => item.basketItemId !== basketItemId),
+    );
   };
 
   return (
