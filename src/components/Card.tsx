@@ -11,13 +11,15 @@ export default function Card({ data }: any) {
 
   const handleAddToBasket = (item: any) => {
     addToBasket(item);
-    setOpenBasket(true);
   };
 
   return (
     <>
       {data.map((item: any, index: any) => (
-        <div className="p-5 border-2 border-slate-300 rounded-2xl" key={index}>
+        <div
+          className="p-5 border-2 h-max border-slate-300 rounded-2xl"
+          key={index}
+        >
           <img className="w-max" src={item.src} />
           <div className="flex justify-between text-sm">
             <p>{item.name}</p>
@@ -32,8 +34,6 @@ export default function Card({ data }: any) {
           </Button>
         </div>
       ))}
-
-      <BasketSheet open={openBasket} setOpen={setOpenBasket} />
     </>
   );
 }

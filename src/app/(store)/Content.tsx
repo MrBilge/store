@@ -2,6 +2,7 @@
 import Card from "@/components/Card";
 import { useSearch } from "@/context/SearchContext";
 import { normalize } from "@/lib/utils";
+import { useBasket } from "@/context/BasketContext";
 
 const data = [
   { id: 1, name: "Portakal Vazo", price: 500, src: "/assets/dekoratif.jpg" },
@@ -15,6 +16,8 @@ const data = [
 ];
 
 export default function Content() {
+  const { basket } = useBasket();
+
   const { searchValue } = useSearch();
   const query = normalize(searchValue);
 

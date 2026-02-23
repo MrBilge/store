@@ -17,7 +17,7 @@ export default function () {
   const [tempValue, setTempValue] = useState("");
 
   return (
-    <div className="w-full p-2 bg-white text-slate-900 xl:px-60">
+    <div className="w-full p-2 bg-white text-slate-900 xl:px-40">
       <div className="flex justify-between  ">
         <Logo />
         <div className="relative flex flex-col justify-center">
