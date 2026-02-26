@@ -17,11 +17,11 @@ export default function Card({ data }: any) {
     <>
       {data.map((item: any, index: any) => (
         <div
-          className="p-5 border-2 h-max border-slate-300 rounded-2xl"
+          className="p-5 border-2 h-max border-slate-300 rounded-2xl font-semibold"
           key={index}
         >
           <img className="w-max" src={item.src} />
-          <div className="flex justify-between text-sm">
+          <div className="flex justify-between text-sm mt-2">
             <p>{item.name}</p>
             <p>{formatPrice(item.price)}</p>
           </div>

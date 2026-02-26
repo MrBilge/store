@@ -11,19 +11,21 @@ import Link from "next/link";
 
 type MiniBasketProps = {
   show: boolean;
-
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function MiniBasket({ show, setShow }: MiniBasketProps) {
-  const { basket, deleteItem } = useBasket();
+  const { basket, deleteItem, addToBasket } = useBasket();
 
-  const totalPrice = basket.reduce((acc, item) => acc + item.price, 0);
+  const productPrice = basket.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0,
+  );
 
   return (
     <div
       className={`
-        bg-white  z-50 w-1/3  xl:w-1/6 h-full 
+        bg-white  z-50 w-1/3  xl:w-1/5 h-full 
         transition-all duration-300 flex flex-col overflow-y-auto
         ${show ? "" : " opacity-0"}
       `}
@@ -42,7 +44,7 @@ export default function MiniBasket({ show, setShow }: MiniBasketProps) {
           basket.map((item) => (
             <div
               key={item.basketItemId}
-              className="flex justify-between items-center mb-4"
+              className="flex justify-between gap-10 items-center mb-4"
             >
               <div className="flex gap-3">
                 <img
@@ -53,22 +55,32 @@ export default function MiniBasket({ show, setShow }: MiniBasketProps) {
 
                 <div>
                   <p className="font-medium text-sm">{item.name}</p>
-                  <p className="text-xs text-gray-500">{item.price} TL</p>
+                  <p className="text-xs text-gray-500">
+                    {item.price * item.quantity} TL
+                  </p>
                 </div>
               </div>
 
-              <button
-                onClick={() => deleteItem(item.basketItemId)}
-                className="bg-gray-200 p-2 rounded-lg"
-              >
-                <TrashIcon className="h-4 w-4 text-red-500" />
-              </button>
+              <div className="flex gap-2 ">
+                <button
+                  onClick={() => deleteItem(item.basketItemId)}
+                  className="px-2 py-0 rounded-full bg-gray-300"
+                >
+                  -
+                </button>
+                <span className="text-sm">{item.quantity}</span>
+                <button
+                  onClick={() => addToBasket(item)}
+                  className="px-2 py-0 rounded-full bg-gray-300"
+                >
+                  +
+                </button>
+              </div>
             </div>
           ))
         )}
       </div>
 
-      {/* FOOTER */}
       <div className="border-t">
         <div className="bg-gray-200 flex gap-1 justify-center items-center p-2 text-sm">
           <CheckBadgeIcon className="w-4 h-4" />
@@ -78,7 +90,7 @@ export default function MiniBasket({ show, setShow }: MiniBasketProps) {
         <div className="flex justify-between items-center bg-black text-white p-5">
           <div className="text-sm">
             <p>Ara Toplam</p>
-            <p>{totalPrice} TL</p>
+            <p>{productPrice} TL</p>
           </div>
 
           <Link

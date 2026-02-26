@@ -10,12 +10,14 @@ import {
 import { categories } from "@/data/categories";
 import AllProducts from "./TopBarAllProducts";
 import { useSearch } from "@/context/SearchContext";
+import { useBasket } from "@/context/BasketContext";
 
 export default function () {
   const [allKategori, setAllKategori] = useState(false);
   const { setSearchValue } = useSearch();
   const [tempValue, setTempValue] = useState("");
-
+  const { basket } = useBasket();
+  const productNumber = basket.length;
   return (
     <div className="w-full p-2 bg-white text-slate-900 xl:px-40">
       <div className="flex justify-between  ">
@@ -38,7 +40,12 @@ export default function () {
 
         <div className="flex justify-center items-center gap-2">
           <Link href="/sepetim">
-            <ShoppingBagIcon className="w-6 h-6" />
+            <div className="relative">
+              <ShoppingBagIcon className=" w-6 h-6" />
+              <span className="absolute right-4 bottom-1 text-xs font-semibold bg-gray-300 px-2 py-1 rounded-full text-red-500">
+                {productNumber}
+              </span>
+            </div>
           </Link>
           <div>
             <UserIcon className="w-6 h-6" />

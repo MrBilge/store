@@ -7,13 +7,15 @@ import {
   ReactNode,
 } from "react";
 
-type BasketItem = {
+export type BasketItem = {
   id: number;
   name: string;
   price: number;
   src: string;
   basketItemId: string;
+  quantity: number;
 };
+
 type BasketContextType = {
   basket: BasketItem[];
   addToBasket: (item: BasketItem) => void;
@@ -37,17 +39,37 @@ export const BasketProvider = ({ children }: { children: ReactNode }) => {
   }, [basket]);
 
   const addToBasket = (item: BasketItem) => {
-    setBasket((prev) => [
-      ...prev,
-      { ...item, basketItemId: crypto.randomUUID() },
-    ]);
-  };
-  const deleteItem = (basketItemId: any) => {
-    setBasket((prev) =>
-      prev.filter((item) => item.basketItemId !== basketItemId),
-    );
+    setBasket((prev) => {
+      const existingItem = prev.find((p) => p.id === item.id);
+
+      if (existingItem) {
+        return prev.map((p) =>
+          p.id === item.id ? { ...p, quantity: p.quantity + 1 } : p,
+        );
+      }
+
+      return [
+        ...prev,
+        {
+          ...item,
+          basketItemId: crypto.randomUUID(),
+          quantity: 1,
+        },
+      ];
+    });
   };
 
+  const deleteItem = (basketItemId: string) => {
+    setBasket((prev) =>
+      prev
+        .map((item) =>
+          item.basketItemId === basketItemId
+            ? { ...item, quantity: item.quantity - 1 }
+            : item,
+        )
+        .filter((item) => item.quantity > 0),
+    );
+  };
   return (
     <BasketContext.Provider value={{ deleteItem, basket, addToBasket }}>
       {children}
