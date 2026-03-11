@@ -19,6 +19,7 @@ export default function Content() {
   const { basket } = useBasket();
 
   const { searchValue } = useSearch();
+
   const query = normalize(searchValue);
 
   const filteredData = query

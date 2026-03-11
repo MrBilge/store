@@ -1,20 +1,20 @@
 "use client";
-
-import { BasketItem, useBasket } from "@/context/BasketContext";
 import { useState } from "react";
+import { BasketItem, useBasket } from "@/context/BasketContext";
+import { formatPrice } from "@/lib/utils";
 
 type ShoppingCartProps = {
   data: BasketItem[];
 };
 
 export default function ShoppingCart({ data }: ShoppingCartProps) {
-  const productPrice = data.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0,
-  );
-  const kargoPrice = 200;
-  const totalPrice = productPrice + kargoPrice;
-  const [quantitties, setQuantites] = useState(1);
+  const productsPrice = data.reduce((acc, item) => {
+    return item.quantity ? acc + item.price * item.quantity : 0;
+  }, 0);
+  const kargoPrice = productsPrice >= 900 ? 200 : 0;
+
+  const totalPrice = productsPrice + kargoPrice;
+  const isDisabled = data.length === 0;
 
   const [saleCode, setSaleCode] = useState(false);
   const { addToBasket, deleteItem } = useBasket();
@@ -29,7 +29,7 @@ export default function ShoppingCart({ data }: ShoppingCartProps) {
         Alışveriş Sepeti
       </h2>
 
-      {productPrice === 0 && (
+      {productsPrice === 0 && (
         <p className="text-gray-500">Sepetinizde Ürün Bulunmuyor.</p>
       )}
 
@@ -73,7 +73,7 @@ export default function ShoppingCart({ data }: ShoppingCartProps) {
               </div>
 
               <div className="font-semibold">
-                {item.price * item.quantity} TL
+                {item.quantity && formatPrice(item.price * item.quantity)} TL
               </div>
             </div>
           ))}
@@ -87,17 +87,17 @@ export default function ShoppingCart({ data }: ShoppingCartProps) {
 
             <div className="flex justify-between text-sm mb-1">
               <p>Ara toplam</p>
-              <p>{productPrice} TL</p>
+              <p>{formatPrice(productsPrice)} </p>
             </div>
 
             <div className="flex justify-between text-sm mb-1">
               <p>Kargo Tutarı</p>
-              <p>{kargoPrice} TL</p>
+              <p>{formatPrice(kargoPrice)} </p>
             </div>
 
             <div className="flex justify-between border-t border-slate-300 pt-2 mt-2 font-semibold">
               <p>Toplam</p>
-              <p>{totalPrice} TL</p>
+              <p>{formatPrice(totalPrice)}</p>
             </div>
 
             <div className="mt-5">
@@ -126,7 +126,15 @@ export default function ShoppingCart({ data }: ShoppingCartProps) {
               )}
             </div>
 
-            <button className="w-full rounded p-2 bg-green-500 hover:bg-green-400 transition text-white text-center mt-3 font-semibold">
+            <button
+              disabled={isDisabled}
+              className={`w-full rounded p-2 mt-3 font-semibold transition
+  ${
+    isDisabled
+      ? "bg-gray-300 cursor-not-allowed"
+      : "bg-green-500 hover:bg-green-400 text-white cursor-pointer"
+  }`}
+            >
               Ödemeye Geç
             </button>
           </div>

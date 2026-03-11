@@ -12,8 +12,8 @@ export type BasketItem = {
   name: string;
   price: number;
   src: string;
-  basketItemId: string;
-  quantity: number;
+  basketItemId?: string;
+  quantity?: number;
 };
 
 type BasketContextType = {
@@ -44,7 +44,9 @@ export const BasketProvider = ({ children }: { children: ReactNode }) => {
 
       if (existingItem) {
         return prev.map((p) =>
-          p.id === item.id ? { ...p, quantity: p.quantity + 1 } : p,
+          p.id === item.id
+            ? { ...p, quantity: p.quantity ? p.quantity + 1 : 0 }
+            : p,
         );
       }
 
@@ -64,10 +66,10 @@ export const BasketProvider = ({ children }: { children: ReactNode }) => {
       prev
         .map((item) =>
           item.basketItemId === basketItemId
-            ? { ...item, quantity: item.quantity - 1 }
+            ? { ...item, quantity: item.quantity ? item.quantity - 1 : 0 }
             : item,
         )
-        .filter((item) => item.quantity > 0),
+        .filter((item) => (item.quantity ? item.quantity > 0 : null)),
     );
   };
   return (

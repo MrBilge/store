@@ -1,13 +1,9 @@
 "use client";
+import Link from "next/link";
 import { useBasket } from "@/context/BasketContext";
 import { XCircleIcon } from "@heroicons/react/24/outline";
-import {
-  CheckBadgeIcon,
-  ChevronRightIcon,
-  TrashIcon,
-} from "@heroicons/react/24/solid";
-
-import Link from "next/link";
+import { CheckBadgeIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { formatPrice } from "@/lib/utils";
 
 type MiniBasketProps = {
   show: boolean;
@@ -56,7 +52,7 @@ export default function MiniBasket({ show, setShow }: MiniBasketProps) {
                 <div>
                   <p className="font-medium text-sm">{item.name}</p>
                   <p className="text-xs text-gray-500">
-                    {item.price * item.quantity} TL
+                    {formatPrice(item.price * item.quantity)}
                   </p>
                 </div>
               </div>
@@ -90,7 +86,7 @@ export default function MiniBasket({ show, setShow }: MiniBasketProps) {
         <div className="flex justify-between items-center bg-black text-white p-5">
           <div className="text-sm">
             <p>Ara Toplam</p>
-            <p>{productPrice} TL</p>
+            <p>{formatPrice(productPrice)} TL</p>
           </div>
 
           <Link

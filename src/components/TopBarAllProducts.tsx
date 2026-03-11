@@ -8,7 +8,7 @@ export default function AllProducts({ setAllKategori }: any) {
   const activeData = categories.find((cat) => cat.title === activeCategory);
   return (
     <div
-      className="flex  absolute  top-full  left-5 xl:left-0 -mt-1   w-full  bg-white text-black z-50 p-2 rounded-lg "
+      className="flex  w-full  absolute z-50 p-2  top-full  left-5 xl:left-0 -mt-1    bg-white text-black  rounded-lg "
       onMouseEnter={() => setAllKategori(true)}
       onMouseLeave={() => {
         setAllKategori(false);
