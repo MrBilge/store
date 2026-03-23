@@ -9,12 +9,13 @@ import {
 } from "@heroicons/react/24/outline";
 import { categories } from "@/data/categories";
 import AllProducts from "./TopBarAllProducts";
-import { useSearch } from "@/context/SearchContext";
+// import { useSearch } from "@/context/SearchContext";
 import { useBasket } from "@/context/BasketContext";
+import SearchInput from "./SearchInput";
 
 export default function () {
   const [allKategori, setAllKategori] = useState(false);
-  const { setSearchValue } = useSearch();
+  // const { setSearchValue } = useSearch();
   const [tempValue, setTempValue] = useState("");
   const { basket } = useBasket();
   const productNumber = basket.length;
@@ -25,17 +26,7 @@ export default function () {
         <div className="relative flex flex-col justify-center">
           <MagnifyingGlassIcon className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
 
-          <input
-            value={tempValue}
-            onChange={(e) => setTempValue(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                setSearchValue(tempValue);
-              }
-            }}
-            className="w-[800px] h-10 bg-gray-100 rounded-2xl text-black placeholder:text-black pl-10"
-            placeholder="Ara..."
-          />
+          <SearchInput />
         </div>
 
         <div className="flex justify-center items-center gap-2">
