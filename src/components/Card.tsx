@@ -12,7 +12,6 @@ type CardProps = {
 export default function Card({ data }: any) {
   const { addToBasket, basket } = useBasket();
   const [addedIds, setAddedIds] = useState<number[]>([]);
-  console.log("data", data);
 
   const handleAddToBasket = (item: BasketItem) => {
     addToBasket(item);

@@ -1,25 +1,27 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useState } from "react";
 
 export default function SearchInput() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   const [value, setValue] = useState(searchParams.get("search") || "");
 
   const handleSearch = () => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams();
 
     if (value.trim()) {
       params.set("search", value);
-    } else {
-      params.delete("search");
     }
 
-    // 🔥 yönlendirme
-    router.push(`/products/${params.toString()}`);
+    if (pathname.startsWith("/products")) {
+      router.push(`${pathname}?${params.toString()}`);
+    } else {
+      router.push(`/products?${params.toString()}`);
+    }
   };
 
   return (
