@@ -7,7 +7,14 @@ export default function Page({ searchParams }: any) {
   const query = normalize(searchValue);
 
   const filteredData = query
-    ? products.filter((item) => normalize(item.name).includes(query))
+    ? products.filter((item) => {
+        return (
+          normalize(item.name).includes(query) ||
+          normalize(item.category).includes(query) ||
+          normalize(item.subCategory).includes(query) ||
+          normalize(item.subProduct).includes(query)
+        );
+      })
     : products;
 
   return <Content data={filteredData} />;

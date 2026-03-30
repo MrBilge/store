@@ -1,21 +1,31 @@
 "use client";
 
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SearchInput() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
-  const [value, setValue] = useState(searchParams.get("search") || "");
+  const [value, setValue] = useState("");
+
+  // 🔥 URL → input sync
+  useEffect(() => {
+    setValue(searchParams.get("search") || "");
+  }, [searchParams]);
 
   const handleSearch = () => {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(searchParams.toString());
 
     if (value.trim()) {
       params.set("search", value);
+    } else {
+      params.delete("search");
     }
+
+    // 🔥 page reset (çok önemli UX)
+    params.delete("page");
 
     if (pathname.startsWith("/products")) {
       router.push(`${pathname}?${params.toString()}`);

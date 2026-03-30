@@ -40,10 +40,16 @@ export const categories = [
       {
         title: "Dekorasyon",
         items: [
-          { title: "Tablo", path: "/products/ev/dekorasyon/tablo" },
+          { title: "Vazo", path: "/products/ev/dekorasyon/vazo" },
           { title: "Ayna", path: "/products/ev/dekorasyon/ayna" },
-          { title: "Duvar Saati", path: "/products/ev/dekorasyon/duvar-saati" },
-          { title: "Aydınlatma", path: "/products/ev/dekorasyon/aydinlatma" },
+          { title: "Duvar Saati", path: "/products/ev/dekorasyon/saat" },
+        ],
+      },
+      {
+        title: "Aydınlatma",
+        items: [
+          { title: "Lamba", path: "/products/ev/aydinlatma/lamba" },
+          { title: "Avize", path: "/products/ev/aydinlatma/avize" },
         ],
       },
       {
@@ -52,6 +58,8 @@ export const categories = [
           { title: "Yemek Takımı", path: "/products/ev/sofra/yemek-takimi" },
           { title: "Çatal Kaşık", path: "/products/ev/sofra/catal-kasik" },
           { title: "Bardak", path: "/products/ev/sofra/bardak" },
+          { title: "Tabak", path: "/products/ev/sofra/tabak" },
+          { title: "Kase", path: "/products/ev/sofra/kase" },
         ],
       },
     ],
@@ -75,19 +83,22 @@ export const categories = [
       {
         title: "Telefon & Tablet",
         items: [
-          { title: "Cep Telefonu", path: "/products/elektronik/telefon" },
           {
-            title: "/products/elektronik/tablet",
-            path: "/products/elektronik/tablet",
+            title: "Cep Telefonu",
+            path: "/products/elektronik/telefon/cep-telefonu",
           },
-          { title: "Akıllı Saat", path: "/products/elektronik/akilli-saat" },
+          { title: "Tablet", path: "/products/elektronik/telefon/tablet" },
+          {
+            title: "Akıllı Saat",
+            path: "/products/elektronik/telefon/akilli-saat",
+          },
         ],
       },
       {
         title: "TV & Görüntü",
         items: [
-          { title: "Televizyon", path: "/products/elektronik/tv" },
-          { title: "Projeksiyon", path: "/products/elektronik/projeksiyon" },
+          { title: "Televizyon", path: "/products/elektronik/tv/televizyon" },
+          { title: "Projeksiyon", path: "/products/elektronik/tv/projeksiyon" },
         ],
       },
     ],
@@ -100,17 +111,17 @@ export const categories = [
       {
         title: "Giyim",
         items: [
-          { title: "T-Shirt", path: "/products/erkek/tshirt" },
-          { title: "Gömlek", path: "/products/erkek/gomlek" },
-          { title: "Pantolon", path: "/products/erkek/pantolon" },
-          { title: "Jean", path: "/products/erkek/jean" },
+          { title: "T-Shirt", path: "/products/erkek/giyim/tshirt" },
+          { title: "Gömlek", path: "/products/erkek/giyim/gomlek" },
+          { title: "Pantolon", path: "/products/erkek/giyim/pantolon" },
+          { title: "Jean", path: "/products/erkek/giyim/jean" },
         ],
       },
       {
         title: "Dış Giyim",
         items: [
-          { title: "Mont", path: "/products/erkek/mont" },
-          { title: "Kaban", path: "/products/erkek/kaban" },
+          { title: "Mont", path: "/products/erkek/dis-giyim/mont" },
+          { title: "Kaban", path: "/products/erkek/dis-giyim/kaban" },
         ],
       },
       {
@@ -130,25 +141,28 @@ export const categories = [
       {
         title: "Giyim",
         items: [
-          { title: "Elbise", path: "/products/kadin/elbise" },
-          { title: "Bluz", path: "/products/kadin/bluz" },
-          { title: "Etek", path: "/products/kadin/etek" },
-          { title: "Pantolon", path: "/products/kadin/pantolon" },
+          { title: "Elbise", path: "/products/kadin/giyim/elbise" },
+          { title: "Bluz", path: "/products/kadin/giyim/bluz" },
+          { title: "Etek", path: "/products/kadin/giyim/etek" },
+          { title: "Pantolon", path: "/products/kadin/giyim/pantolon" },
         ],
       },
       {
         title: "Dış Giyim",
         items: [
-          { title: "Ceket", path: "/products/kadin/ceket" },
-          { title: "Kaban", path: "/products/kadin/kaban" },
+          { title: "Ceket", path: "/products/kadin/dis-giyim/ceket" },
+          { title: "Kaban", path: "/products/kadin/dis-giyim/kaban" },
         ],
       },
       {
         title: "Ayakkabı & Çanta",
         items: [
-          { title: "Topuklu Ayakkabı", path: "/products/kadin/topuklu" },
-          { title: "Sneaker", path: "/products/kadin/sneaker" },
-          { title: "Çanta", path: "/products/kadin/canta" },
+          {
+            title: "Topuklu Ayakkabı",
+            path: "/products/kadin/ayakkabi/topuklu",
+          },
+          { title: "Sneaker", path: "/products/kadin/ayakkabi/sneaker" },
+          { title: "Çanta", path: "/products/kadin/canta/canta" },
         ],
       },
     ],
@@ -161,23 +175,23 @@ export const categories = [
       {
         title: "Temel Gıda",
         items: [
-          { title: "Makarna", path: "/products/market/makarna" },
-          { title: "Pirinç", path: "/products/market/pirinc" },
-          { title: "Yağ", path: "/products/market/yag" },
+          { title: "Makarna", path: "/products/market/gida/makarna" },
+          { title: "Pirinç", path: "/products/market/gida/pirinc" },
+          { title: "Yağ", path: "/products/market/gida/yag" },
         ],
       },
       {
         title: "Atıştırmalık",
         items: [
-          { title: "Cips", path: "/products/market/cips" },
-          { title: "Çikolata", path: "/products/market/cikolata" },
+          { title: "Cips", path: "/products/market/atistirmalik/cips" },
+          { title: "Çikolata", path: "/products/market/atistirmalik/cikolata" },
         ],
       },
       {
         title: "İçecek",
         items: [
-          { title: "Kahve", path: "/products/market/kahve" },
-          { title: "Çay", path: "/products/market/cay" },
+          { title: "Kahve", path: "/products/market/icecek/kahve" },
+          { title: "Çay", path: "/products/market/icecek/cay" },
         ],
       },
     ],
@@ -190,15 +204,15 @@ export const categories = [
       {
         title: "Saat",
         items: [
-          { title: "Erkek Saat", path: "/products/saat/erkek" },
-          { title: "Kadın Saat", path: "/products/saat/kadin" },
+          { title: "Erkek Saat", path: "/products/saat/saat/erkek" },
+          { title: "Kadın Saat", path: "/products/saat/saat/kadin" },
         ],
       },
       {
         title: "Takı",
         items: [
-          { title: "Kolye", path: "/products/aksesuar/kolye" },
-          { title: "Bileklik", path: "/products/aksesuar/bileklik" },
+          { title: "Kolye", path: "/products/aksesuar/taki/kolye" },
+          { title: "Bileklik", path: "/products/aksesuar/taki/bileklik" },
         ],
       },
     ],
@@ -211,15 +225,15 @@ export const categories = [
       {
         title: "Ayakkabı",
         items: [
-          { title: "Sneaker", path: "/products/ayakkabi/sneaker" },
-          { title: "Bot", path: "/products/ayakkabi/bot" },
+          { title: "Sneaker", path: "/products/ayakkabi/ayakkabi/sneaker" },
+          { title: "Bot", path: "/products/ayakkabi/ayakkabi/bot" },
         ],
       },
       {
         title: "Çanta",
         items: [
-          { title: "Sırt Çantası", path: "/products/canta/sirt" },
-          { title: "El Çantası", path: "/products/canta/el-cantasi" },
+          { title: "Sırt Çantası", path: "/products/canta/canta/sirt" },
+          { title: "El Çantası", path: "/products/canta/canta/el-cantasi" },
         ],
       },
     ],
@@ -232,15 +246,18 @@ export const categories = [
       {
         title: "Makyaj",
         items: [
-          { title: "Fondöten", path: "/products/kozmetik/fondoten" },
-          { title: "Ruj", path: "/products/kozmetik/ruj" },
+          { title: "Fondöten", path: "/products/kozmetik/makyaj/fondoten" },
+          { title: "Ruj", path: "/products/kozmetik/makyaj/ruj" },
         ],
       },
       {
         title: "Cilt Bakım",
         items: [
-          { title: "Nemlendirici", path: "/products/kozmetik/nemlendirici" },
-          { title: "Temizleyici", path: "/products/kozmetik/temizleyici" },
+          {
+            title: "Nemlendirici",
+            path: "/products/kozmetik/cilt/nemlendirici",
+          },
+          { title: "Temizleyici", path: "/products/kozmetik/cilt/temizleyici" },
         ],
       },
     ],
@@ -253,15 +270,18 @@ export const categories = [
       {
         title: "Spor Giyim",
         items: [
-          { title: "Eşofman", path: "/products/spor/esofman" },
-          { title: "Tayt", path: "/products/spor/tayt" },
+          { title: "Eşofman", path: "/products/spor/giyim/esofman" },
+          { title: "Tayt", path: "/products/spor/giyim/tayt" },
         ],
       },
       {
         title: "Outdoor",
         items: [
-          { title: "Çadır", path: "/products/outdoor/cadir" },
-          { title: "Uyku Tulumu", path: "/products/outdoor/uyku-tulumu" },
+          { title: "Çadır", path: "/products/outdoor/outdoor/cadir" },
+          {
+            title: "Uyku Tulumu",
+            path: "/products/outdoor/outdoor/uyku-tulumu",
+          },
         ],
       },
     ],
@@ -274,8 +294,14 @@ export const categories = [
       {
         title: "Popüler Ürünler",
         items: [
-          { title: "En Çok Satanlar", path: "/products/cok-satanlar" },
-          { title: "En Çok Favorilenenler", path: "/products/favoriler" },
+          {
+            title: "En Çok Satanlar",
+            path: "/products/cok-satanlar/populer/en-cok-satanlar",
+          },
+          {
+            title: "Favoriler",
+            path: "/products/cok-satanlar/populer/favoriler",
+          },
         ],
       },
     ],
