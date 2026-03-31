@@ -10,7 +10,6 @@ import {
   SparklesIcon,
   FireIcon,
   TrophyIcon,
-  MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
 
 export const categories = [
@@ -192,116 +191,6 @@ export const categories = [
         items: [
           { title: "Kahve", path: "/products/market/icecek/kahve" },
           { title: "Çay", path: "/products/market/icecek/cay" },
-        ],
-      },
-    ],
-  },
-
-  {
-    title: "Saat & Aksesuar",
-    icon: ClockIcon,
-    megaMenu: [
-      {
-        title: "Saat",
-        items: [
-          { title: "Erkek Saat", path: "/products/saat/saat/erkek" },
-          { title: "Kadın Saat", path: "/products/saat/saat/kadin" },
-        ],
-      },
-      {
-        title: "Takı",
-        items: [
-          { title: "Kolye", path: "/products/aksesuar/taki/kolye" },
-          { title: "Bileklik", path: "/products/aksesuar/taki/bileklik" },
-        ],
-      },
-    ],
-  },
-
-  {
-    title: "Ayakkabı & Çanta",
-    icon: ShoppingBagIcon,
-    megaMenu: [
-      {
-        title: "Ayakkabı",
-        items: [
-          { title: "Sneaker", path: "/products/ayakkabi/ayakkabi/sneaker" },
-          { title: "Bot", path: "/products/ayakkabi/ayakkabi/bot" },
-        ],
-      },
-      {
-        title: "Çanta",
-        items: [
-          { title: "Sırt Çantası", path: "/products/canta/canta/sirt" },
-          { title: "El Çantası", path: "/products/canta/canta/el-cantasi" },
-        ],
-      },
-    ],
-  },
-
-  {
-    title: "Kozmetik",
-    icon: SparklesIcon,
-    megaMenu: [
-      {
-        title: "Makyaj",
-        items: [
-          { title: "Fondöten", path: "/products/kozmetik/makyaj/fondoten" },
-          { title: "Ruj", path: "/products/kozmetik/makyaj/ruj" },
-        ],
-      },
-      {
-        title: "Cilt Bakım",
-        items: [
-          {
-            title: "Nemlendirici",
-            path: "/products/kozmetik/cilt/nemlendirici",
-          },
-          { title: "Temizleyici", path: "/products/kozmetik/cilt/temizleyici" },
-        ],
-      },
-    ],
-  },
-
-  {
-    title: "Spor & Outdoor",
-    icon: FireIcon,
-    megaMenu: [
-      {
-        title: "Spor Giyim",
-        items: [
-          { title: "Eşofman", path: "/products/spor/giyim/esofman" },
-          { title: "Tayt", path: "/products/spor/giyim/tayt" },
-        ],
-      },
-      {
-        title: "Outdoor",
-        items: [
-          { title: "Çadır", path: "/products/outdoor/outdoor/cadir" },
-          {
-            title: "Uyku Tulumu",
-            path: "/products/outdoor/outdoor/uyku-tulumu",
-          },
-        ],
-      },
-    ],
-  },
-
-  {
-    title: "Çok Satanlar",
-    icon: TrophyIcon,
-    megaMenu: [
-      {
-        title: "Popüler Ürünler",
-        items: [
-          {
-            title: "En Çok Satanlar",
-            path: "/products/cok-satanlar/populer/en-cok-satanlar",
-          },
-          {
-            title: "Favoriler",
-            path: "/products/cok-satanlar/populer/favoriler",
-          },
         ],
       },
     ],

@@ -10,7 +10,6 @@ export default function SearchInput() {
 
   const [value, setValue] = useState("");
 
-  // 🔥 URL → input sync
   useEffect(() => {
     setValue(searchParams.get("search") || "");
   }, [searchParams]);
@@ -24,14 +23,10 @@ export default function SearchInput() {
       params.delete("search");
     }
 
-    // 🔥 page reset (çok önemli UX)
     params.delete("page");
 
-    if (pathname.startsWith("/products")) {
-      router.push(`${pathname}?${params.toString()}`);
-    } else {
-      router.push(`/products?${params.toString()}`);
-    }
+    // ✅ HER ZAMAN base products'a git
+    router.push(`/products?${params.toString()}`);
   };
 
   return (

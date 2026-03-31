@@ -16,7 +16,6 @@ export default function Page({ params, searchParams }: any) {
     const matchesSearch = query ? normalize(item.name).includes(query) : true;
 
     const matchesCategory = category ? item.category === category : true;
-
     const matchesSubCategory = subCategory
       ? item.subCategory === subCategory
       : true;
