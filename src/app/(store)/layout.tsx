@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useBasket } from "@/context/BasketContext";
 import MiniBasket from "@/components/BasketSheet";
 import { usePathname } from "next/navigation";
+import FilterBar from "@/components/FilterBar";
 
 export default function Layout({
   children,
@@ -22,7 +23,11 @@ export default function Layout({
   return (
     <div className="h-dvh flex flex-col overflow-y-hidden ">
       <TopBar />
-      <div className="flex flex-1  h-full min-h-0 bg-gray-100">
+      <div className="flex flex-1 w-full h-full min-h-0 bg-gray-100">
+        <div>   
+        <FilterBar/>
+        </div>
+      
         <div
           className={`no-scrollbar
     transition-all duration-400

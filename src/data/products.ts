@@ -1,4 +1,30 @@
-type Product = {
+type ProductItem = {
+  name: string;
+  price: number;
+  brand: string;
+  gpu: string;
+  cpu: string;
+  rating: number;
+};
+type BaseLeaf = {
+  category: string;
+  subCategory: string;
+  subProduct: string;
+};
+
+type OldLeaf = BaseLeaf & {
+  names: [string, string, string];
+  prices: [number, number, number];
+};
+
+type NewLeaf = BaseLeaf & {
+  items: ProductItem[];
+};
+
+type Leaf = OldLeaf | NewLeaf;
+
+
+export type Product = {
   id: number;
   name: string;
   price: number;
@@ -6,16 +32,11 @@ type Product = {
   category: string;
   subCategory: string;
   subProduct: string;
+  brand: string;
+  gpu: string;
+  cpu: string;
+  rating: number;
 };
-
-type Leaf = {
-  category: string;
-  subCategory: string;
-  subProduct: string;
-  names: [string, string, string];
-  prices: [number, number, number];
-};
-
 const productLeaves: Leaf[] = [
   {
     category: "ev",
@@ -140,12 +161,36 @@ const productLeaves: Leaf[] = [
     prices: [95, 130, 240],
   },
 
-  {
+   {
     category: "elektronik",
     subCategory: "bilgisayar",
     subProduct: "laptop",
-    names: ["Gaming Laptop", "İnce Hafif Laptop", "Profesyonel İş Laptopu"],
-    prices: [32999, 21999, 28499],
+    items: [
+      {
+        name: "Asus Gaming Laptop",
+        price: 32999,
+        brand: "asus",
+        gpu: "rtx3050",
+        cpu: "i7",
+        rating: 4.5,
+      },
+      {
+        name: "Apple i5 İnce Hafif Laptop",
+        price: 21999,
+        brand: "apple",
+        gpu: "mx450",
+        cpu: "i5",
+        rating: 4.2,
+      },
+      {
+        name: "Profesyonel İş Laptopu",
+        price: 28499,
+        brand: "dell",
+        gpu: "rtx3060",
+        cpu: "i7",
+        rating: 4.7,
+      },
+    ],
   },
   {
     category: "elektronik",
@@ -383,14 +428,38 @@ const productLeaves: Leaf[] = [
 
 let currentId = 1;
 
-export const products: Product[] = productLeaves.flatMap((leaf) =>
-  leaf.names.map((name, index) => ({
+export const products: Product[] = productLeaves.flatMap((leaf) => {
+  // 🟢 yeni yapı (laptop gibi)
+  if ("items" in leaf) {
+    return leaf.items.map((item:any) => ({
+      id: currentId++,
+      name: item.name,
+      price: item.price,
+      brand: item.brand,
+      gpu: item.gpu,
+      cpu: item.cpu,
+      rating: item.rating,
+      src: "/assets/dekoratif.jpg",
+      category: leaf.category,
+      subCategory: leaf.subCategory,
+      subProduct: leaf.subProduct,
+    }));
+  }
+
+  // 🔴 eski yapı (names + prices)
+  return leaf.names.map((name, index) => ({
     id: currentId++,
     name,
     price: leaf.prices[index],
+    brand: "generic", // default
+    gpu: "none",
+    cpu: "none",
+    rating: 3.5,
     src: "/assets/dekoratif.jpg",
     category: leaf.category,
     subCategory: leaf.subCategory,
     subProduct: leaf.subProduct,
-  })),
-);
+  }));
+});
+
+
