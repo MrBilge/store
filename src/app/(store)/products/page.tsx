@@ -14,28 +14,19 @@ export default function Page({ searchParams }: any) {
   const [min, max] = searchParams.price?.split("-") || [];
 
   const filteredData = products.filter((item) => {
-    // 🔍 SEARCH
     const matchesSearch = query
-      ? [
-          item.name,
-          item.category,
-          item.subCategory,
-          item.subProduct,
-        ].some((field) => normalize(field).includes(query))
+      ? [item.name, item.category, item.subCategory, item.subProduct].some(
+          (field) => normalize(field).includes(query),
+        )
       : true;
 
-    // 🔥 FILTERS
-    const matchBrand =
-      brands.length > 0 ? brands.includes(item.brand) : true;
+    const matchBrand = brands.length > 0 ? brands.includes(item.brand) : true;
 
-    const matchGpu =
-      gpus.length > 0 ? gpus.includes(item.gpu) : true;
+    const matchGpu = gpus.length > 0 ? gpus.includes(item.gpu) : true;
 
-    const matchCpu =
-      cpus.length > 0 ? cpus.includes(item.cpu) : true;
+    const matchCpu = cpus.length > 0 ? cpus.includes(item.cpu) : true;
 
-    const matchRating =
-      rating > 0 ? item.rating >= rating : true;
+    const matchRating = rating > 0 ? item.rating >= rating : true;
 
     const matchPrice =
       (min ? item.price >= Number(min) : true) &&

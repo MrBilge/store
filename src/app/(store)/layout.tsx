@@ -24,10 +24,10 @@ export default function Layout({
     <div className="h-dvh flex flex-col overflow-y-hidden ">
       <TopBar />
       <div className="flex flex-1 w-full h-full min-h-0 bg-gray-100">
-        <div>   
-        <FilterBar/>
+        <div className="no-scrollbar overflow-y-auto shrink-0">
+          <FilterBar />
         </div>
-      
+
         <div
           className={`no-scrollbar
     transition-all duration-400

@@ -11,8 +11,7 @@ export default function LaptopFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const getArray = (key: string) =>
-    searchParams.get(key)?.split(",") || [];
+  const getArray = (key: string) => searchParams.get(key)?.split(",") || [];
 
   const selectedBrands = getArray("brand");
   const selectedGpu = getArray("gpu");
@@ -76,10 +75,9 @@ export default function LaptopFilters() {
   };
 
   return (
-    <div className="space-y-6">
-
+    <div className="space-y-6  ">
       {/* MARKA */}
-      <div>
+      <div className="w-full">
         <h3 className="font-semibold">Marka</h3>
         {brands.map((brand) => (
           <label

@@ -1,10 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { BasketItem, useBasket } from "@/context/BasketContext";
 import { formatPrice } from "@/lib/utils";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { SearchIcon } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 type CardProps = {
   data: BasketItem[];
@@ -13,6 +14,12 @@ type CardProps = {
 export default function Card({ data }: any) {
   const { addToBasket, basket } = useBasket();
   const [addedIds, setAddedIds] = useState<number[]>([]);
+  const [value, setValue] = useState("");
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    setValue(searchParams.get("search") || "");
+  }, [searchParams]);
 
   const handleAddToBasket = (item: BasketItem) => {
     addToBasket(item);
@@ -22,8 +29,11 @@ export default function Card({ data }: any) {
   if (data.length === 0)
     return (
       <div className="flex gap-2">
-        <SearchIcon />
-        <p className="whitespace-nowrap">Aradiginiz Sonuc bulunamadi</p>
+        <SearchIcon className="shrink-0" />
+        <p className="whitespace-nowrap">
+          Sonuçlar arasında <span className="font-semibold">``{value}``</span>{" "}
+          ürünü bulunamadı.
+        </p>
       </div>
     );
   else

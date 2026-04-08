@@ -14,4 +14,19 @@ export function formatPrice(value: number): string {
   }).format(value);
 }
 
-export const normalize = (str: string) => str.toLowerCase().replace(/\s/g, "");
+export const normalize = (str: string) => {
+  const charMap: Record<string, string> = {
+    ı: "i",
+    İ: "i",
+    ğ: "g",
+    ü: "u",
+    ş: "s",
+    ö: "o",
+    ç: "c",
+  };
+
+  return str
+    .toLowerCase()
+    .replace(/[ıİğüşöç]/g, (char) => charMap[char] || char)
+    .replace(/\s/g, "");
+};

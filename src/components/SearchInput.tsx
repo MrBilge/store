@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 export default function SearchInput() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const pathname = usePathname();
 
   const [value, setValue] = useState("");
 
@@ -23,7 +22,7 @@ export default function SearchInput() {
       params.delete("search");
     }
 
-    params.delete("page");
+    params.delete("page"); // for use link share , refresh page , vs
 
     // ✅ HER ZAMAN base products'a git
     router.push(`/products?${params.toString()}`);
