@@ -37,9 +37,9 @@ export default function MiniBasket({ show, setShow }: MiniBasketProps) {
         {basket.length === 0 ? (
           <p>Sepetiniz boş</p>
         ) : (
-          basket.map((item) => (
+          basket.map((item, index) => (
             <div
-              key={item.basketItemId}
+              key={index}
               className="flex justify-between gap-10 items-center mb-4"
             >
               <div className="flex gap-3">

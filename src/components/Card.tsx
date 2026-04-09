@@ -43,29 +43,31 @@ export default function Card({ data }: any) {
           const added = basket.some((bItem) => bItem.id === item.id);
           return (
             <div
-              className="p-5 border-2 h-max border-slate-300 rounded-2xl font-semibold"
+              className="border border-slate-300 rounded-2xl font-semibold flex flex-col h-[400px]"
               key={index}
             >
-              <img className="w-max" src={item.src} />
-              <div className="flex justify-between text-sm mt-2">
-                <p>{item.name}</p>
+              <img className="w-full rounded-t-lg" src={item.src} />
+              <div className="flex flex-1 justify-between gap-5 text-sm mt-2 px-5">
+                <p className="line-clamp-3">{item.name}</p>
                 <p>{formatPrice(item.price)}</p>
               </div>
-              <Button
-                disabled={added}
-                onClick={() => handleAddToBasket(item)}
-                variant="outline"
-                className="w-full mt-5 cursor-pointer"
-              >
-                {added ? (
-                  <p className="flex justify-center items-center gap-2">
-                    <CheckCircleIcon className="text-green-500 w-4 h-4" />{" "}
-                    Sepete Eklendi
-                  </p>
-                ) : (
-                  "Sepete Ekle"
-                )}
-              </Button>
+              <div className="p-5">
+                <Button
+                  disabled={added}
+                  onClick={() => handleAddToBasket(item)}
+                  variant="outline"
+                  className="w-full  cursor-pointer"
+                >
+                  {added ? (
+                    <p className="flex justify-center items-center gap-2">
+                      <CheckCircleIcon className="text-green-500 w-4 h-4" />{" "}
+                      Sepete Eklendi
+                    </p>
+                  ) : (
+                    "Sepete Ekle"
+                  )}
+                </Button>{" "}
+              </div>
             </div>
           );
         })}

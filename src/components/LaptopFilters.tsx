@@ -1,6 +1,8 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import { SearchIcon } from "lucide-react";
 
 const brands = ["apple", "dell", "lenovo", "asus", "hp"];
 const gpus = ["rtx3050", "rtx3060", "mx450"];
@@ -20,9 +22,17 @@ export default function LaptopFilters() {
 
   const priceRange = searchParams.get("price")?.split("-") || ["", ""];
 
-  // 🔥 ORTAK PARAM GÜNCELLEME
+  const [minPrice, setMinPrice] = useState(priceRange[0]);
+  const [maxPrice, setMaxPrice] = useState(priceRange[1]);
+
+  useEffect(() => {
+    setMinPrice(priceRange[0]);
+    setMaxPrice(priceRange[1]);
+  }, [searchParams]);
+
+  // 🔥 PARAM GÜNCELLEME (STABLE)
   const updateParams = (key: string, values: string[]) => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(window.location.search);
 
     if (values.length > 0) {
       params.set(key, values.join(","));
@@ -32,9 +42,7 @@ export default function LaptopFilters() {
 
     params.delete("page");
 
-    // ✅ BURASI KRİTİK
     router.replace(`?${params.toString()}`, { scroll: false });
-    router.refresh();
   };
 
   const toggle = (key: string, value: string) => {
@@ -47,23 +55,21 @@ export default function LaptopFilters() {
     updateParams(key, updated);
   };
 
-  const handlePrice = (min: string, max: string) => {
-    const params = new URLSearchParams(searchParams.toString());
+  const handlePrice = () => {
+    const params = new URLSearchParams(window.location.search);
 
-    if (min && max) {
-      params.set("price", `${min}-${max}`);
+    if (minPrice && maxPrice) {
+      params.set("price", `${minPrice}-${maxPrice}`);
     } else {
       params.delete("price");
     }
 
     router.replace(`?${params.toString()}`, { scroll: false });
-    router.refresh();
   };
 
   const handleRating = (rate: number) => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(window.location.search);
 
-    // toggle gibi çalışsın istiyorsan:
     if (selectedRating === rate.toString()) {
       params.delete("rating");
     } else {
@@ -71,19 +77,15 @@ export default function LaptopFilters() {
     }
 
     router.replace(`?${params.toString()}`, { scroll: false });
-    router.refresh();
   };
 
   return (
-    <div className="space-y-6  ">
+    <div className="space-y-6">
       {/* MARKA */}
-      <div className="w-full">
+      <div>
         <h3 className="font-semibold">Marka</h3>
         {brands.map((brand) => (
-          <label
-            key={brand}
-            className="flex gap-2 text-slate-700 font-semibold cursor-pointer"
-          >
+          <label key={brand} className="flex gap-2 cursor-pointer">
             <input
               type="checkbox"
               checked={selectedBrands.includes(brand)}
@@ -100,17 +102,26 @@ export default function LaptopFilters() {
         <div className="flex gap-2 mt-2">
           <input
             placeholder="Min"
-            defaultValue={priceRange[0]}
-            onBlur={(e) => handlePrice(e.target.value, priceRange[1])}
-            className="border p-1 w-20 bg-white rounded-lg placeholder:pl-2"
+            value={minPrice}
+            onChange={(e) => setMinPrice(e.target.value)}
+            onBlur={handlePrice}
+            className="border p-1 w-20 bg-white rounded-lg"
           />
 
           <input
             placeholder="Max"
-            defaultValue={priceRange[1]}
-            onBlur={(e) => handlePrice(priceRange[0], e.target.value)}
-            className="border p-1 w-20 bg-white rounded-lg placeholder:pl-2"
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(e.target.value)}
+            onBlur={handlePrice}
+            className="border p-1 w-20 bg-white rounded-lg"
           />
+
+          <button
+            onClick={handlePrice}
+            className="p-2 bg-orange-500 rounded-lg hover:bg-orange-600 transition"
+          >
+            <SearchIcon className="w-4 h-4 text-white" />
+          </button>
         </div>
       </div>
 
@@ -118,10 +129,7 @@ export default function LaptopFilters() {
       <div>
         <h3 className="font-semibold">Ekran Kartı</h3>
         {gpus.map((gpu) => (
-          <label
-            key={gpu}
-            className="flex gap-2 text-slate-700 font-semibold cursor-pointer"
-          >
+          <label key={gpu} className="flex gap-2 cursor-pointer">
             <input
               type="checkbox"
               checked={selectedGpu.includes(gpu)}
@@ -136,10 +144,7 @@ export default function LaptopFilters() {
       <div>
         <h3 className="font-semibold">İşlemci</h3>
         {cpus.map((cpu) => (
-          <label
-            key={cpu}
-            className="flex gap-2 text-slate-700 font-semibold cursor-pointer"
-          >
+          <label key={cpu} className="flex gap-2 cursor-pointer">
             <input
               type="checkbox"
               checked={selectedCpu.includes(cpu)}
@@ -157,7 +162,7 @@ export default function LaptopFilters() {
           <button
             key={rate}
             onClick={() => handleRating(rate)}
-            className={`block text-left text-slate-700 cursor-pointer ${
+            className={`block text-left cursor-pointer ${
               selectedRating === rate.toString() ? "font-bold" : ""
             }`}
           >

@@ -3,34 +3,39 @@ import { products } from "@/data/products";
 import { normalize } from "@/lib/utils";
 
 export default function Page({ params, searchParams }: any) {
+  // 🔹 SEARCH
   const searchValue = searchParams?.search || "";
   const query = normalize(searchValue);
 
+  // 🔹 SLUG
   const slug = params.slug || [];
-
   const category = slug[0];
   const subCategory = slug[1];
   const subProduct = slug[2];
 
-  // 🔥 FILTER PARAMS
-  const brands = searchParams.brand?.split(",") || [];
-  const gpus = searchParams.gpu?.split(",") || [];
-  const cpus = searchParams.cpu?.split(",") || [];
-  const rating = Number(searchParams.rating || 0);
-  const [min, max] = searchParams.price?.split("-") || [];
+  // 🔥 HELPER (array/string fix)
+  const getValue = (val: string | string[] | undefined) =>
+    Array.isArray(val) ? val[0] : val;
+
+  // 🔹 FILTER PARAMS
+  const brands = getValue(searchParams.brand)?.split(",") || [];
+  const gpus = getValue(searchParams.gpu)?.split(",") || [];
+  const cpus = getValue(searchParams.cpu)?.split(",") || [];
+
+  const rating = Number(getValue(searchParams.rating) || 0);
+
+  const price = getValue(searchParams.price);
+  const [min, max] = price?.split("-") || [];
 
   const filteredData = products.filter((item) => {
-const matchesSearch = query
-  ? [
-      item.name,
-      item.category,
-      item.subCategory,
-      item.subProduct,
-    ].some((field) =>
-      normalize(field).includes(query)
-    )
-  : true;
+    // 🔍 SEARCH
+    const matchesSearch = query
+      ? [item.name, item.category, item.subCategory, item.subProduct].some(
+          (field) => normalize(field).includes(query),
+        )
+      : true;
 
+    // 🔍 CATEGORY
     const matchesCategory = category ? item.category === category : true;
 
     const matchesSubCategory = subCategory
@@ -41,22 +46,18 @@ const matchesSearch = query
       ? item.subProduct === subProduct
       : true;
 
-    // 🔥 FILTERS
-    const matchBrand =
-      brands.length > 0 ? brands.includes(item.brand) : true;
+    // 🔍 FILTERS
+    const matchBrand = brands.length > 0 ? brands.includes(item.brand) : true;
 
-    const matchGpu =
-      gpus.length > 0 ? gpus.includes(item.gpu) : true;
+    const matchGpu = gpus.length > 0 ? gpus.includes(item.gpu) : true;
 
-    const matchCpu =
-      cpus.length > 0 ? cpus.includes(item.cpu) : true;
+    const matchCpu = cpus.length > 0 ? cpus.includes(item.cpu) : true;
 
-    const matchRating =
-      rating > 0 ? item.rating >= rating : true;
+    const matchRating = rating > 0 ? item.rating >= rating : true;
 
     const matchPrice =
-      (min ? item.price >= Number(min) : true) &&
-      (max ? item.price <= Number(max) : true);
+      (min !== undefined && min !== "" ? item.price >= Number(min) : true) &&
+      (max !== undefined && max !== "" ? item.price <= Number(max) : true);
 
     return (
       matchesSearch &&

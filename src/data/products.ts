@@ -23,7 +23,6 @@ type NewLeaf = BaseLeaf & {
 
 type Leaf = OldLeaf | NewLeaf;
 
-
 export type Product = {
   id: number;
   name: string;
@@ -161,7 +160,7 @@ const productLeaves: Leaf[] = [
     prices: [95, 130, 240],
   },
 
-   {
+  {
     category: "elektronik",
     subCategory: "bilgisayar",
     subProduct: "laptop",
@@ -431,7 +430,7 @@ let currentId = 1;
 export const products: Product[] = productLeaves.flatMap((leaf) => {
   // 🟢 yeni yapı (laptop gibi)
   if ("items" in leaf) {
-    return leaf.items.map((item:any) => ({
+    return leaf.items.map((item: any) => ({
       id: currentId++,
       name: item.name,
       price: item.price,
@@ -461,5 +460,3 @@ export const products: Product[] = productLeaves.flatMap((leaf) => {
     subProduct: leaf.subProduct,
   }));
 });
-
-
