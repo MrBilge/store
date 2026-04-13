@@ -10,6 +10,10 @@ export default function Page({ searchParams }: any) {
   const brands = searchParams.brand?.split(",") || [];
   const gpus = searchParams.gpu?.split(",") || [];
   const cpus = searchParams.cpu?.split(",") || [];
+
+  const sizes = searchParams.size?.split(",") || [];
+  const colors = searchParams.color?.split(",") || [];
+
   const rating = Number(searchParams.rating || 0);
   const [min, max] = searchParams.price?.split("-") || [];
 
@@ -26,6 +30,13 @@ export default function Page({ searchParams }: any) {
 
     const matchCpu = cpus.length > 0 ? cpus.includes(item.cpu) : true;
 
+    // shoes
+    const matchSize =
+      sizes.length > 0 ? item.size && sizes.includes(item.size) : true;
+
+    const matchColor =
+      colors.length > 0 ? item.color && colors.includes(item.color) : true;
+
     const matchRating = rating > 0 ? item.rating >= rating : true;
 
     const matchPrice =
@@ -37,6 +48,8 @@ export default function Page({ searchParams }: any) {
       matchBrand &&
       matchGpu &&
       matchCpu &&
+      matchSize &&
+      matchColor &&
       matchRating &&
       matchPrice
     );
