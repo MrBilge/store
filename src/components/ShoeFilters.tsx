@@ -4,20 +4,22 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { SearchIcon } from "lucide-react";
 
-const brands = ["apple", "dell", "lenovo", "asus", "hp"];
-const gpus = ["rtx3050", "rtx3060", "mx450"];
-const cpus = ["i5", "i7", "ryzen5", "ryzen7"];
+const brands = ["nike", "adidas", "puma", "newbalance"];
+const sizes = ["38", "39", "40", "41", "42", "43"];
+const colors = ["siyah", "beyaz", "kirmizi", "mavi"];
+const categories = ["spor", "klasik", "gunluk"];
 const ratings = [4, 3, 2];
 
-export default function LaptopFilters() {
+export default function ShoeFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   const getArray = (key: string) => searchParams.get(key)?.split(",") || [];
 
   const selectedBrands = getArray("brand");
-  const selectedGpu = getArray("gpu");
-  const selectedCpu = getArray("cpu");
+  const selectedSizes = getArray("size");
+  const selectedColors = getArray("color");
+  const selectedCategories = getArray("category");
   const selectedRating = searchParams.get("rating") || "";
 
   const priceRange = searchParams.get("price")?.split("-") || ["", ""];
@@ -80,6 +82,7 @@ export default function LaptopFilters() {
 
   return (
     <div className="space-y-6">
+      {/* Marka */}
       <div>
         <h3 className="font-semibold">Marka</h3>
         {brands.map((brand) => (
@@ -94,6 +97,7 @@ export default function LaptopFilters() {
         ))}
       </div>
 
+      {/* Fiyat */}
       <div>
         <h3 className="font-semibold">Fiyat</h3>
         <div className="flex gap-2 mt-2">
@@ -122,34 +126,52 @@ export default function LaptopFilters() {
         </div>
       </div>
 
+      {/* Numara */}
       <div>
-        <h3 className="font-semibold">Ekran Kartı</h3>
-        {gpus.map((gpu) => (
-          <label key={gpu} className="flex gap-2 cursor-pointer">
+        <h3 className="font-semibold">Numara</h3>
+        {sizes.map((size) => (
+          <label key={size} className="flex gap-2 cursor-pointer">
             <input
               type="checkbox"
-              checked={selectedGpu.includes(gpu)}
-              onChange={() => toggle("gpu", gpu)}
+              checked={selectedSizes.includes(size)}
+              onChange={() => toggle("size", size)}
             />
-            {gpu}
+            {size}
           </label>
         ))}
       </div>
 
+      {/* Renk */}
       <div>
-        <h3 className="font-semibold">İşlemci</h3>
-        {cpus.map((cpu) => (
-          <label key={cpu} className="flex gap-2 cursor-pointer">
+        <h3 className="font-semibold">Renk</h3>
+        {colors.map((color) => (
+          <label key={color} className="flex gap-2 cursor-pointer">
             <input
               type="checkbox"
-              checked={selectedCpu.includes(cpu)}
-              onChange={() => toggle("cpu", cpu)}
+              checked={selectedColors.includes(color)}
+              onChange={() => toggle("color", color)}
             />
-            {cpu}
+            {color}
           </label>
         ))}
       </div>
 
+      {/* Kategori */}
+      <div>
+        <h3 className="font-semibold">Kategori</h3>
+        {categories.map((cat) => (
+          <label key={cat} className="flex gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={selectedCategories.includes(cat)}
+              onChange={() => toggle("category", cat)}
+            />
+            {cat}
+          </label>
+        ))}
+      </div>
+
+      {/* Rating */}
       <div>
         <h3 className="font-semibold">Değerlendirme</h3>
         {ratings.map((rate) => (

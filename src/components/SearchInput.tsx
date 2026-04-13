@@ -14,17 +14,12 @@ export default function SearchInput() {
   }, [searchParams]);
 
   const handleSearch = () => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(); // ✅ TEMİZ BAŞLA
 
     if (value.trim()) {
       params.set("search", value);
-    } else {
-      params.delete("search");
     }
 
-    params.delete("page"); // for use link share , refresh page , vs
-
-    // ✅ HER ZAMAN base products'a git
     router.push(`/products?${params.toString()}`);
   };
 

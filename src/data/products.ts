@@ -2,8 +2,10 @@ type ProductItem = {
   name: string;
   price: number;
   brand: string;
-  gpu: string;
-  cpu: string;
+  gpu?: string;
+  cpu?: string;
+  size?: string;
+  color?: string;
   rating: number;
 };
 type BaseLeaf = {
@@ -23,6 +25,10 @@ type NewLeaf = BaseLeaf & {
 
 type Leaf = OldLeaf | NewLeaf;
 
+function isNewLeaf(leaf: Leaf): leaf is NewLeaf {
+  return "items" in leaf;
+}
+
 export type Product = {
   id: number;
   name: string;
@@ -32,8 +38,10 @@ export type Product = {
   subCategory: string;
   subProduct: string;
   brand: string;
-  gpu: string;
-  cpu: string;
+  gpu?: string; // ✅ optional
+  cpu?: string; // ✅ optional
+  size?: string; // ✅
+  color?: string; // ✅
   rating: number;
 };
 const productLeaves: Leaf[] = [
@@ -295,19 +303,63 @@ const productLeaves: Leaf[] = [
     category: "erkek",
     subCategory: "ayakkabi",
     subProduct: "sneaker",
-    names: ["Beyaz Sneaker", "Koşu Sneaker", "Günlük Sneaker"],
-    prices: [990, 1340, 1180],
+    items: [
+      {
+        name: "Beyaz Sneaker",
+        price: 990,
+        brand: "nike",
+        size: "42",
+        color: "beyaz",
+        rating: 4.3,
+      },
+      {
+        name: "Koşu Sneaker",
+        price: 1340,
+        brand: "adidas",
+        size: "43",
+        color: "siyah",
+        rating: 4.5,
+      },
+      {
+        name: "Günlük Sneaker",
+        price: 1180,
+        brand: "puma",
+        size: "41",
+        color: "gri",
+        rating: 4.2,
+      },
+    ],
   },
   {
     category: "erkek",
     subCategory: "ayakkabi",
     subProduct: "klasik",
-    names: [
-      "Klasik Deri Ayakkabı",
-      "Bağcıklı Klasik Ayakkabı",
-      "Kösele Ayakkabı",
+    items: [
+      {
+        name: "Klasik Deri Ayakkabı",
+        price: 1540,
+        brand: "derimod",
+        size: "42",
+        color: "siyah",
+        rating: 4.4,
+      },
+      {
+        name: "Bağcıklı Klasik Ayakkabı",
+        price: 1760,
+        brand: "hotic",
+        size: "43",
+        color: "kahverengi",
+        rating: 4.6,
+      },
+      {
+        name: "Kösele Ayakkabı",
+        price: 1890,
+        brand: "kemal tanca",
+        size: "42",
+        color: "siyah",
+        rating: 4.7,
+      },
     ],
-    prices: [1540, 1760, 1890],
   },
 
   {
@@ -356,15 +408,63 @@ const productLeaves: Leaf[] = [
     category: "kadin",
     subCategory: "ayakkabi",
     subProduct: "topuklu",
-    names: ["Topuklu Ayakkabı", "İnce Topuklu Ayakkabı", "Şık Gece Ayakkabısı"],
-    prices: [1290, 1490, 1680],
+    items: [
+      {
+        name: "Topuklu Ayakkabı",
+        price: 1290,
+        brand: "zara",
+        size: "38",
+        color: "siyah",
+        rating: 4.3,
+      },
+      {
+        name: "İnce Topuklu Ayakkabı",
+        price: 1490,
+        brand: "bershka",
+        size: "39",
+        color: "red",
+        rating: 4.5,
+      },
+      {
+        name: "Şık Gece Ayakkabısı",
+        price: 1680,
+        brand: "hm",
+        size: "37",
+        color: "siyah",
+        rating: 4.7,
+      },
+    ],
   },
   {
     category: "kadin",
     subCategory: "ayakkabi",
     subProduct: "sneaker",
-    names: ["Kadın Sneaker", "Günlük Sneaker", "Kalın Taban Sneaker"],
-    prices: [1120, 980, 1260],
+    items: [
+      {
+        name: "Kadın Sneaker",
+        price: 1120,
+        brand: "nike",
+        size: "40",
+        color: "beyaz",
+        rating: 4.4,
+      },
+      {
+        name: "Günlük Sneaker",
+        price: 980,
+        brand: "adidas",
+        size: "39",
+        color: "siyah",
+        rating: 4.2,
+      },
+      {
+        name: "Kalın Taban Sneaker",
+        price: 1260,
+        brand: "puma",
+        size: "41",
+        color: "mavi",
+        rating: 4.6,
+      },
+    ],
   },
   {
     category: "kadin",
@@ -428,12 +528,13 @@ const productLeaves: Leaf[] = [
 let currentId = 1;
 
 export const products: Product[] = productLeaves.flatMap((leaf) => {
-  // 🟢 yeni yapı (laptop gibi)
-  if ("items" in leaf) {
-    return leaf.items.map((item: any) => ({
+  if (isNewLeaf(leaf)) {
+    return leaf.items.map((item) => ({
       id: currentId++,
       name: item.name,
       price: item.price,
+      size: item.size,
+      color: item.color,
       brand: item.brand,
       gpu: item.gpu,
       cpu: item.cpu,
@@ -445,14 +546,16 @@ export const products: Product[] = productLeaves.flatMap((leaf) => {
     }));
   }
 
-  // 🔴 eski yapı (names + prices)
+  // oldLeaf
   return leaf.names.map((name, index) => ({
     id: currentId++,
     name,
     price: leaf.prices[index],
-    brand: "generic", // default
+    brand: "generic",
     gpu: "none",
     cpu: "none",
+    size: undefined, // ✅ ekle
+    color: undefined, // ✅ ekle
     rating: 3.5,
     src: "/assets/dekoratif.jpg",
     category: leaf.category,
