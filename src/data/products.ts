@@ -6,6 +6,8 @@ type ProductItem = {
   cpu?: string;
   size?: string;
   color?: string;
+  itemCategory?: string;
+  category?: string;
   rating: number;
 };
 type BaseLeaf = {
@@ -38,10 +40,11 @@ export type Product = {
   subCategory: string;
   subProduct: string;
   brand: string;
-  gpu?: string; // ✅ optional
-  cpu?: string; // ✅ optional
-  size?: string; // ✅
-  color?: string; // ✅
+  gpu?: string;
+  cpu?: string;
+  size?: string;
+  color?: string;
+  itemCategory?: string;
   rating: number;
 };
 const productLeaves: Leaf[] = [
@@ -187,7 +190,7 @@ const productLeaves: Leaf[] = [
         brand: "apple",
         gpu: "mx450",
         cpu: "i5",
-        rating: 4.2,
+        rating: 2,
       },
       {
         name: "Profesyonel İş Laptopu",
@@ -311,6 +314,7 @@ const productLeaves: Leaf[] = [
         size: "42",
         color: "beyaz",
         rating: 4.3,
+        itemCategory: "casual",
       },
       {
         name: "Koşu Sneaker",
@@ -319,6 +323,7 @@ const productLeaves: Leaf[] = [
         size: "43",
         color: "siyah",
         rating: 4.5,
+        itemCategory: "spor",
       },
       {
         name: "Günlük Sneaker",
@@ -327,6 +332,7 @@ const productLeaves: Leaf[] = [
         size: "41",
         color: "gri",
         rating: 4.2,
+        itemCategory: " spor",
       },
     ],
   },
@@ -342,6 +348,7 @@ const productLeaves: Leaf[] = [
         size: "42",
         color: "siyah",
         rating: 4.4,
+        itemCategory: "klasik",
       },
       {
         name: "Bağcıklı Klasik Ayakkabı",
@@ -350,6 +357,7 @@ const productLeaves: Leaf[] = [
         size: "43",
         color: "kahverengi",
         rating: 4.6,
+        category: "casual",
       },
       {
         name: "Kösele Ayakkabı",
@@ -358,6 +366,7 @@ const productLeaves: Leaf[] = [
         size: "42",
         color: "siyah",
         rating: 4.7,
+        category: "klasik",
       },
     ],
   },
@@ -415,7 +424,8 @@ const productLeaves: Leaf[] = [
         brand: "zara",
         size: "38",
         color: "siyah",
-        rating: 4.3,
+        rating: 2.3,
+        itemCategory: "casual",
       },
       {
         name: "İnce Topuklu Ayakkabı",
@@ -423,15 +433,17 @@ const productLeaves: Leaf[] = [
         brand: "bershka",
         size: "39",
         color: "red",
-        rating: 4.5,
+        rating: 1.5,
+        itemCategory: "casual",
       },
       {
-        name: "Şık Gece Ayakkabısı",
+        name: "Şık Gece Ayakkabısı dsjfhsdjfhsdf",
         price: 1680,
         brand: "hm",
         size: "37",
         color: "siyah",
-        rating: 4.7,
+        rating: 3.7,
+        itemCategory: "klasik",
       },
     ],
   },
@@ -446,7 +458,8 @@ const productLeaves: Leaf[] = [
         brand: "nike",
         size: "40",
         color: "beyaz",
-        rating: 4.4,
+        rating: 1.5,
+        itemCategory: "casual",
       },
       {
         name: "Günlük Sneaker",
@@ -455,6 +468,7 @@ const productLeaves: Leaf[] = [
         size: "39",
         color: "siyah",
         rating: 4.2,
+        itemCategory: "spor",
       },
       {
         name: "Kalın Taban Sneaker",
@@ -535,6 +549,7 @@ export const products: Product[] = productLeaves.flatMap((leaf) => {
       price: item.price,
       size: item.size,
       color: item.color,
+      itemCategory: item.itemCategory,
       brand: item.brand,
       gpu: item.gpu,
       cpu: item.cpu,
@@ -554,8 +569,9 @@ export const products: Product[] = productLeaves.flatMap((leaf) => {
     brand: "generic",
     gpu: "none",
     cpu: "none",
-    size: undefined, // ✅ ekle
-    color: undefined, // ✅ ekle
+    size: undefined,
+    color: undefined,
+    itemCategory: undefined,
     rating: 3.5,
     src: "/assets/dekoratif.jpg",
     category: leaf.category,

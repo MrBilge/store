@@ -6,8 +6,8 @@ import { SearchIcon } from "lucide-react";
 
 const brands = ["nike", "adidas", "puma", "newbalance"];
 const sizes = ["38", "39", "40", "41", "42", "43"];
-const colors = ["siyah", "beyaz", "kirmizi", "mavi"];
-const categories = ["spor", "klasik", "gunluk"];
+const colors = ["siyah", "beyaz", "kırmızı", "mavi"];
+const categories = ["spor", "klasik", "casual"];
 const ratings = [4, 3, 2];
 
 export default function ShoeFilters() {

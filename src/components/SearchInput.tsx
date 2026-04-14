@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function SearchInput() {
@@ -14,7 +14,7 @@ export default function SearchInput() {
   }, [searchParams]);
 
   const handleSearch = () => {
-    const params = new URLSearchParams(); // ✅ TEMİZ BAŞLA
+    const params = new URLSearchParams();
 
     if (value.trim()) {
       params.set("search", value);

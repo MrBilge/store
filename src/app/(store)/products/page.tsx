@@ -2,7 +2,7 @@ import Content from "./Content";
 import { products } from "@/data/products";
 import { normalize } from "@/lib/utils";
 
-export default function Page({ searchParams }: any) {
+export default function Page({ basketSheetOpen, searchParams }: any) {
   const searchValue = searchParams?.search || "";
   const query = normalize(searchValue);
 
@@ -13,6 +13,7 @@ export default function Page({ searchParams }: any) {
 
   const sizes = searchParams.size?.split(",") || [];
   const colors = searchParams.color?.split(",") || [];
+  const category = searchParams.category?.split(",") || [];
 
   const rating = Number(searchParams.rating || 0);
   const [min, max] = searchParams.price?.split("-") || [];
@@ -37,6 +38,11 @@ export default function Page({ searchParams }: any) {
     const matchColor =
       colors.length > 0 ? item.color && colors.includes(item.color) : true;
 
+    const matchesCategory =
+      category.length > 0
+        ? item.category && category.includes(item.itemCategory)
+        : true;
+
     const matchRating = rating > 0 ? item.rating >= rating : true;
 
     const matchPrice =
@@ -51,7 +57,8 @@ export default function Page({ searchParams }: any) {
       matchSize &&
       matchColor &&
       matchRating &&
-      matchPrice
+      matchPrice &&
+      matchesCategory
     );
   });
 
