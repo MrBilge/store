@@ -31,7 +31,7 @@ export default function Layout({
         <div
           className={`no-scrollbar
     transition-all duration-400
-    ${isCartPage ? "block" : "grid grid-cols-3  xl:grid-cols-4 items-start gap-10"}
+    ${isCartPage ? "block" : "grid grid-cols-3  xl:grid-cols-4 items-start  gap-10"}
     py-20 px-20 xl:px-40 w-full h-full overflow-y-auto
     ${openBasket ? "mr-5 xl:mr-10" : ""}
   `}

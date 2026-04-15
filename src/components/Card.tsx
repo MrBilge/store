@@ -43,12 +43,12 @@ export default function Card({ data }: any) {
           const added = basket.some((bItem) => bItem.id === item.id);
           return (
             <div
-              className={`border border-slate-300 rounded-2xl font-semibold flex flex-col`}
+              className={`border border-slate-300 rounded-2xl font-semibold flex flex-col `}
               key={index}
             >
               <img className="w-full rounded-t-lg" src={item.src} />
-              <div className="flex flex-1  justify-between gap-5 text-sm mt-2 px-5">
-                <p>{item.name}</p>
+              <div className="flex  h-16  justify-between gap-5 text-sm mt-2 px-5">
+                <p className="flex  line-clamp-3">{item.name}</p>
                 <p>{formatPrice(item.price)}</p>
               </div>
               <div className="p-5">
