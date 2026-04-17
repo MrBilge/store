@@ -60,7 +60,7 @@ export default function Card({ data }: any) {
                 >
                   {added ? (
                     <p className="flex justify-center items-center gap-2">
-                      <CheckCircleIcon className="text-green-500 w-4 h-4" />{" "}
+                      <CheckCircleIcon className="text-green-500 w-4 h-4" />
                       Sepete Eklendi
                     </p>
                   ) : (

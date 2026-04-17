@@ -21,18 +21,16 @@ export default function MiniBasket({ show, setShow }: MiniBasketProps) {
   return (
     <div
       className={`
-        bg-white  z-50 w-1/3  xl:w-1/5 h-full 
+        bg-white  z-50 w-1/3  xl:w-1/4 h-full 
         transition-all duration-300 flex flex-col overflow-y-auto
         ${show ? "" : " opacity-0"}
       `}
     >
-      {/* HEADER */}
       <div className="flex justify-between  px-5 border-b">
         <h2 className="text-lg font-semibold">Sepetim</h2>
         <XCircleIcon onClick={() => setShow(false)} className="w-6" />
       </div>
 
-      {/* CONTENT */}
       <div className="flex-1 overflow-y-auto px-5 py-4">
         {basket.length === 0 ? (
           <p>Sepetiniz boş</p>
