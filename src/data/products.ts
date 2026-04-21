@@ -7,8 +7,11 @@ type ProductItem = {
   size?: string;
   color?: string;
   itemCategory?: string;
+  itemSubCategory?: string;
   category?: string;
   rating: number;
+  package?: string;
+  weight?: string;
 };
 type BaseLeaf = {
   category: string;
@@ -38,13 +41,16 @@ export type Product = {
   src: string;
   category: string;
   subCategory: string;
-  subProduct: string;
+  subProduct?: string;
   brand: string;
   gpu?: string;
   cpu?: string;
   size?: string;
   color?: string;
   itemCategory?: string;
+  itemSubCategory?: string;
+  weight?: string;
+  package?: string;
   rating: number;
 };
 const productLeaves: Leaf[] = [
@@ -491,29 +497,160 @@ const productLeaves: Leaf[] = [
   {
     category: "market",
     subCategory: "gida yiyecek icecek",
-    subProduct: "makarna",
+    subProduct: "karisik",
     items: [
+      // 🍝 MAKARNA
       {
         name: "Spagetti Makarna",
         price: 32,
         brand: "barilla",
         rating: 4.2,
-        itemCategory: "temel-gida",
+        itemCategory: "makarna",
+        itemSubCategory: "light",
+        package: "paket",
+        weight: "500",
+      },
+      {
+        name: "Vegan Sebzeli Makarna",
+        price: 36,
+        brand: "barilla",
+        rating: 4.4,
+        itemCategory: "makarna",
+        itemSubCategory: "vegan",
+        package: "paket",
+        weight: "500",
       },
 
+      // 🍚 PİRİNÇ
       {
-        name: "Kalem Makarna",
-        price: 28,
-        brand: "filiz",
-        rating: 4.0,
-        itemCategory: "temel-gida",
+        name: "Baldo Pirinç",
+        price: 64,
+        brand: "duru",
+        rating: 4.5,
+        itemCategory: "pirinc",
+        itemSubCategory: "organik",
+        package: "paket",
+        weight: "1000",
       },
       {
-        name: "Tam Buğday Makarna",
+        name: "Osmancık Pirinç",
+        price: 58,
+        brand: "duru",
+        rating: 4.1,
+        itemCategory: "pirinc",
+        itemSubCategory: "glutensiz",
+        package: "paket",
+        weight: "1000",
+      },
+
+      // 🛢 YAĞ
+      {
+        name: "Ayçiçek Yağı 1L",
+        price: 120,
+        brand: "yudum",
+        rating: 4.3,
+        itemCategory: "yag",
+        itemSubCategory: "organik",
+        package: "sise",
+        weight: "1000",
+      },
+      {
+        name: "Zeytinyağı 500ml",
+        price: 180,
+        brand: "komili",
+        rating: 4.7,
+        itemCategory: "yag",
+        itemSubCategory: "organik",
+        package: "sise",
+        weight: "500",
+      },
+
+      // 🍫 ÇİKOLATA
+      {
+        name: "Bitter Çikolata",
+        price: 25,
+        brand: "eti",
+        rating: 4.2,
+        itemCategory: "cikolata",
+        itemSubCategory: "seker_ilavesiz",
+        package: "paket",
+        weight: "250",
+      },
+      {
+        name: "Sütlü Çikolata",
+        price: 20,
+        brand: "ulker",
+        rating: 4.0,
+        itemCategory: "cikolata",
+        itemSubCategory: "light",
+        package: "paket",
+        weight: "250",
+      },
+
+      // 🥤 İÇECEK
+      {
+        name: "Portakal Suyu",
+        price: 18,
+        brand: "cappy",
+        rating: 4.1,
+        itemCategory: "icecek",
+        itemSubCategory: "organik",
+        package: "sise",
+        weight: "1000",
+      },
+      {
+        name: "Kola Zero",
+        price: 15,
+        brand: "cocacola",
+        rating: 4.3,
+        itemCategory: "icecek",
+        itemSubCategory: "seker_ilavesiz",
+        package: "sise",
+        weight: "1000",
+      },
+
+      // 🧀 SÜT ÜRÜNLERİ
+      {
+        name: "Yoğurt 1kg",
         price: 45,
-        brand: "barilla",
+        brand: "sutas",
+        rating: 4.6,
+        itemCategory: "sut_urunleri",
+        itemSubCategory: "light",
+        package: "kutu",
+        weight: "1000",
+      },
+      {
+        name: "Süt 1L",
+        price: 30,
+        brand: "icim",
+        rating: 4.4,
+        itemCategory: "sut_urunleri",
+        itemSubCategory: "organik",
+        package: "kutu",
+        weight: "1000",
+      },
+
+      // 🍪 BİSKÜVİ
+      {
+        name: "Çikolatalı Bisküvi",
+        price: 22,
+        brand: "eti",
+        rating: 4.2,
+        itemCategory: "biskuvi",
+        itemSubCategory: "light",
+        package: "paket",
+        weight: "250",
+      },
+      {
+        name: "Yulaflı Bisküvi",
+        price: 28,
+        brand: "torku",
         rating: 4.5,
-        itemCategory: "saglikli",
+        itemCategory: "biskuvi",
+        itemSubCategory: "vegan",
+        package: "paket",
+        weight: "250",
       },
     ],
   },
@@ -530,6 +667,9 @@ export const products: Product[] = productLeaves.flatMap((leaf) => {
       size: item.size,
       color: item.color,
       itemCategory: item.itemCategory,
+      itemSubCategory: item.itemSubCategory,
+      package: item.package,
+      weight: item.weight,
       brand: item.brand,
       gpu: item.gpu,
       cpu: item.cpu,
@@ -552,6 +692,9 @@ export const products: Product[] = productLeaves.flatMap((leaf) => {
     size: undefined,
     color: undefined,
     itemCategory: undefined,
+    itemSubCategory: undefined,
+    package: undefined,
+    weight: undefined,
     rating: 3.5,
     src: "/assets/dekoratif.jpg",
     category: leaf.category,

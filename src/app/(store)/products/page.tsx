@@ -1,6 +1,7 @@
 import Content from "./Content";
 import { products } from "@/data/products";
 import { normalize } from "@/lib/utils";
+import { Wrench } from "lucide-react";
 
 export default function Page({ basketSheetOpen, searchParams }: any) {
   const searchValue = searchParams?.search || "";
@@ -14,14 +15,17 @@ export default function Page({ basketSheetOpen, searchParams }: any) {
   const sizes = searchParams.size?.split(",") || [];
   const colors = searchParams.color?.split(",") || [];
   const category = searchParams.category?.split(",") || [];
+  const subCategory = searchParams.subCategory?.split(",") || [];
+  const packege = searchParams.package?.split(",") || [];
+  const weight = searchParams.weight?.split(",") || [];
 
   const rating = Number(searchParams.rating || 0);
   const [min, max] = searchParams.price?.split("-") || [];
 
   const filteredData = products.filter((item) => {
     const matchesSearch = query
-      ? [item.name, item.category, item.subCategory, item.subProduct].some(
-          (field) => normalize(field).includes(query),
+      ? [item.name, item.category, item.subCategory].some((field) =>
+          normalize(field).includes(query),
         )
       : true;
 
@@ -43,6 +47,17 @@ export default function Page({ basketSheetOpen, searchParams }: any) {
         ? item.category && category.includes(item.itemCategory)
         : true;
 
+    const matchesSubCategory =
+      subCategory.length > 0
+        ? subCategory.includes(item.itemSubCategory)
+        : true;
+
+    const matchesPackage =
+      packege.length > 0 ? packege.includes(item.package) : true;
+
+    const matchesWeight =
+      weight.length > 0 ? weight.includes(item.weight) : true;
+
     const matchRating = rating > 0 ? item.rating >= rating : true;
 
     const matchPrice =
@@ -58,7 +73,10 @@ export default function Page({ basketSheetOpen, searchParams }: any) {
       matchColor &&
       matchRating &&
       matchPrice &&
-      matchesCategory
+      matchesCategory &&
+      matchesSubCategory &&
+      matchesPackage &&
+      matchesWeight
     );
   });
 
