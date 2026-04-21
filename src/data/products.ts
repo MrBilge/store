@@ -490,52 +490,32 @@ const productLeaves: Leaf[] = [
 
   {
     category: "market",
-    subCategory: "gida",
+    subCategory: "gida yiyecek icecek",
     subProduct: "makarna",
-    names: ["Spagetti Makarna", "Kalem Makarna", "Tam Buğday Makarna"],
-    prices: [32, 28, 45],
-  },
-  {
-    category: "market",
-    subCategory: "gida",
-    subProduct: "pirinc",
-    names: ["Baldo Pirinç", "Osmancık Pirinç", "Jasmin Pirinç"],
-    prices: [64, 58, 82],
-  },
-  {
-    category: "market",
-    subCategory: "gida  yiyecek",
-    subProduct: "yag",
-    names: ["Ayçiçek Yağı", "Zeytinyağı", "Mısırözü Yağı"],
-    prices: [189, 420, 170],
-  },
-  {
-    category: "market",
-    subCategory: "atistirmalik yiyecek",
-    subProduct: "cips",
-    names: ["Patates Cipsi", "Baharatlı Cips", "Mısır Cipsi"],
-    prices: [42, 48, 39],
-  },
-  {
-    category: "market",
-    subCategory: "atistirmalik yiyecek",
-    subProduct: "cikolata",
-    names: ["Sütlü Çikolata", "Bitter Çikolata", "Fındıklı Çikolata"],
-    prices: [36, 44, 52],
-  },
-  {
-    category: "market",
-    subCategory: "icecek",
-    subProduct: "kahve",
-    names: ["Filtre Kahve", "Türk Kahvesi", "Çekirdek Kahve"],
-    prices: [140, 95, 210],
-  },
-  {
-    category: "market",
-    subCategory: "icecek",
-    subProduct: "cay",
-    names: ["Dökme Çay", "Bergamotlu Çay", "Demlik Poşet Çay"],
-    prices: [110, 125, 98],
+    items: [
+      {
+        name: "Spagetti Makarna",
+        price: 32,
+        brand: "barilla",
+        rating: 4.2,
+        itemCategory: "temel-gida",
+      },
+
+      {
+        name: "Kalem Makarna",
+        price: 28,
+        brand: "filiz",
+        rating: 4.0,
+        itemCategory: "temel-gida",
+      },
+      {
+        name: "Tam Buğday Makarna",
+        price: 45,
+        brand: "barilla",
+        rating: 4.5,
+        itemCategory: "saglikli",
+      },
+    ],
   },
 ];
 

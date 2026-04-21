@@ -1,40 +1,50 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import LaptopFilters from "./LaptopFilters";
-import ShoeFilters from "./ShoeFilters";
-import WatchFilters from "./WatchFilters";
-import FoodFilters from "./FoodFilters";
+
+import ProductFilter from "./ProductFilter";
+import {
+  foodFilters,
+  tvFilters,
+  laptopFilters,
+  shoeFilters,
+  watchFilters,
+} from "@/data/filterData";
 
 export default function FilterBar() {
   const searchParams = useSearchParams();
   const search = searchParams.get("search")?.toLowerCase() || "";
-  const isLaptopSearch =
-    search.includes("laptop") || search.includes("bilgisayar");
-  const isShoeSearch =
-    search.includes("ayakkabi") || search.includes("ayakkabı");
 
-  const isWatchSearch = search.includes("saat");
+  const filterMap = [
+    {
+      check: (s: string) => s.includes("laptop"),
+      component: <ProductFilter filters={laptopFilters} />,
+    },
+    {
+      check: (s: string) => s.includes("tv") || s.includes("televizyon"),
+      component: <ProductFilter filters={tvFilters} />,
+    },
+    {
+      check: (s: string) => s.includes("ayakkabi") || s.includes("ayakkabı"),
+      component: <ProductFilter filters={shoeFilters} />,
+    },
+    {
+      check: (s: string) => s.includes("saat"),
+      component: <ProductFilter filters={watchFilters} />,
+    },
+    {
+      check: (s: string) =>
+        s.includes("gida") ||
+        s.includes("gıda") ||
+        s.includes("market") ||
+        s.includes("yiyecek") ||
+        s.includes("içecek") ||
+        s.includes("icecek"),
+      component: <ProductFilter filters={foodFilters} />,
+    },
+  ];
 
-  const isFoodSearch =
-    search.includes("gida") ||
-    search.includes("gıda") ||
-    search.includes("market") ||
-    search.includes("yiyecek") ||
-    search.includes("içecek") ||
-    search.includes("icecek");
+  const matched = filterMap.find((f) => f.check(search));
 
-  return (
-    <div className=" my-20 ml-10">
-      {isLaptopSearch ? (
-        <LaptopFilters />
-      ) : isShoeSearch ? (
-        <ShoeFilters />
-      ) : isWatchSearch ? (
-        <WatchFilters />
-      ) : isFoodSearch ? (
-        <FoodFilters />
-      ) : null}
-    </div>
-  );
+  return <div className="my-20 ml-10">{matched?.component || null}</div>;
 }
