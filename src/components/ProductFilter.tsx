@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { SearchIcon } from "lucide-react";
-import { FilterItem } from "@/data/filterData";
+import { FilterItem } from "@/data/urlFilterData";
 
 type ProductFilterProps = {
   filters: FilterItem[];

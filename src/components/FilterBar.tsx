@@ -9,7 +9,7 @@ import {
   laptopFilters,
   shoeFilters,
   watchFilters,
-} from "@/data/filterData";
+} from "@/data/urlFilterData";
 
 export default function FilterBar() {
   const searchParams = useSearchParams();

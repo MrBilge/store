@@ -103,6 +103,7 @@ export const foodFilters: FilterItem[] = [
     options: [5, 4, 3, 2],
   },
 ];
+
 export const tvFilters: FilterItem[] = [
   {
     type: "checkbox",
@@ -193,6 +194,7 @@ export const tvFilters: FilterItem[] = [
     options: [5, 4, 3, 2],
   },
 ];
+
 export const laptopFilters: FilterItem[] = [
   {
     type: "checkbox",

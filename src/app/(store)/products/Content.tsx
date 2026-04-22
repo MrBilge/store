@@ -3,7 +3,6 @@ import { useState } from "react";
 
 import Card from "@/components/Card";
 import Pagination from "@/components/Pagination";
-import LaptopFilters from "@/components/LaptopFilters";
 
 export default function Content({ data }: any) {
   const ITEMS_PER_PAGE = 20;
@@ -15,8 +14,6 @@ export default function Content({ data }: any) {
   const currentData = data.slice(startIndex, endIndex);
   return (
     <>
-
-
       <Card data={currentData} />
 
       {currentData.length > 0 && (
