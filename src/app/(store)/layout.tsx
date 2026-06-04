@@ -21,7 +21,7 @@ export default function Layout({
   }, [basket.length]);
 
   return (
-    <div className="h-dvh flex flex-col overflow-y-hidden ">
+    <div className="h-dvh flex flex-col  overflow-y-hidden ">
       <TopBar />
       <div className="flex flex-1 w-full h-full min-h-0 bg-gray-100">
         <div className="no-scrollbar overflow-y-auto shrink-0">
@@ -30,9 +30,9 @@ export default function Layout({
 
         <div
           className={`no-scrollbar
-    transition-all duration-400
+    transition-all duration-400 w-full h-full
     ${isCartPage ? "block" : "grid grid-cols-3  xl:grid-cols-4 items-start  gap-10"}
-    py-20 px-20 xl:px-40 w-full h-full overflow-y-auto
+    py-20 px-20 xl:px-40  overflow-y-auto
     ${openBasket ? "mr-5 xl:mr-10" : ""}
   `}
         >
