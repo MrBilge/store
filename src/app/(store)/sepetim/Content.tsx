@@ -4,6 +4,7 @@ import { useBasket } from "@/context/BasketContext";
 import { BasketItem } from "@/context/BasketContext";
 import { formatPrice } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 type ContentProps = {
   data: BasketItem[];
 };
@@ -43,10 +44,12 @@ export default function Content({ data }: ContentProps) {
               className="w-full border-y p-5 flex justify-between"
             >
               <div className="flex gap-6">
-                <img
+                <Image
                   className="w-32 lg:w-40 object-cover rounded"
                   src={item.src}
                   alt={item.name}
+                  width={160}
+                  height={160}
                 />
 
                 <div className="flex flex-col gap-2 justify-center">

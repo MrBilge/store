@@ -4,6 +4,7 @@ import { useBasket } from "@/context/BasketContext";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { CheckBadgeIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { formatPrice } from "@/lib/utils";
+import Image from "next/image";
 
 type MiniBasketProps = {
   show: boolean;
@@ -41,10 +42,12 @@ export default function MiniBasket({ show, setShow }: MiniBasketProps) {
               className="flex justify-between gap-10 items-center mb-4"
             >
               <div className="flex gap-3">
-                <img
+                <Image
                   src={item.src}
                   alt={item.name}
                   className="w-12 h-12 object-cover rounded"
+                  width={48}
+                  height={48}
                 />
 
                 <div>

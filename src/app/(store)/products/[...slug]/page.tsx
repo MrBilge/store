@@ -1,12 +1,22 @@
 import Content from "./Content";
 import { products } from "@/data/products";
 import { normalize } from "@/lib/utils";
+import type { SearchParams } from "../page";
 
-export default function Page({ params, searchParams }: any) {
-  const searchValue = searchParams?.search || "";
+type PageProps = {
+  params: Promise<{ slug?: string[] }>;
+  searchParams: Promise<SearchParams>;
+};
+
+export default async function Page({ params, searchParams }: PageProps) {
+  const [resolvedParams, resolvedSearchParams] = await Promise.all([
+    params,
+    searchParams,
+  ]);
+  const searchValue = resolvedSearchParams.search || "";
   const query = normalize(searchValue);
 
-  const slug = params.slug || [];
+  const slug = resolvedParams.slug || [];
   const category = slug[0];
   const subCategory = slug[1];
   const subProduct = slug[2];
@@ -14,19 +24,19 @@ export default function Page({ params, searchParams }: any) {
   const getValue = (val: string | string[] | undefined) =>
     Array.isArray(val) ? val[0] : val;
 
-  const brands = getValue(searchParams.brand)?.split(",") || [];
-  const gpus = getValue(searchParams.gpu)?.split(",") || [];
-  const cpus = getValue(searchParams.cpu)?.split(",") || [];
+  const brands = getValue(resolvedSearchParams.brand)?.split(",") || [];
+  const gpus = getValue(resolvedSearchParams.gpu)?.split(",") || [];
+  const cpus = getValue(resolvedSearchParams.cpu)?.split(",") || [];
 
-  const rating = Number(getValue(searchParams.rating) || 0);
+  const rating = Number(getValue(resolvedSearchParams.rating) || 0);
 
-  const price = getValue(searchParams.price);
+  const price = getValue(resolvedSearchParams.price);
   const [min, max] = price?.split("-") || [];
 
   const filteredData = products.filter((item) => {
     const matchesSearch = query
       ? [item.name, item.category, item.subCategory, item.subProduct].some(
-          (field) => normalize(field).includes(query),
+          (field) => field && normalize(field).includes(query),
         )
       : true;
 

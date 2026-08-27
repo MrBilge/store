@@ -1,19 +1,20 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
-import { BasketItem, useBasket } from "@/context/BasketContext";
+import { useBasket } from "@/context/BasketContext";
+import type { Product } from "@/data/products";
 import { formatPrice } from "@/lib/utils";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { SearchIcon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 type CardProps = {
-  data: BasketItem[];
+  data: Product[];
 };
 
-export default function Card({ data }: any) {
+export default function Card({ data }: CardProps) {
   const { addToBasket, basket } = useBasket();
-  const [addedIds, setAddedIds] = useState<number[]>([]);
   const [value, setValue] = useState("");
   const searchParams = useSearchParams();
 
@@ -21,9 +22,8 @@ export default function Card({ data }: any) {
     setValue(searchParams.get("search") || "");
   }, [searchParams]);
 
-  const handleAddToBasket = (item: BasketItem) => {
+  const handleAddToBasket = (item: Product) => {
     addToBasket(item);
-    setAddedIds((prev) => [...prev, item.id]);
   };
 
   if (data.length === 0)
@@ -39,14 +39,20 @@ export default function Card({ data }: any) {
   else
     return (
       <>
-        {data.map((item: BasketItem, index: number) => {
+        {data.map((item) => {
           const added = basket.some((bItem) => bItem.id === item.id);
           return (
             <div
               className={`border border-slate-300 rounded-2xl font-semibold flex flex-col `}
-              key={index}
+              key={item.id}
             >
-              <img className="w-full rounded-t-lg" src={item.src} />
+              <Image
+                className="h-auto w-full rounded-t-lg"
+                src={item.src}
+                alt={item.name}
+                width={500}
+                height={500}
+              />
               <div className="flex  h-16  justify-between gap-5 text-sm mt-2 px-5">
                 <p className="flex  line-clamp-3">{item.name}</p>
                 <p>{formatPrice(item.price)}</p>

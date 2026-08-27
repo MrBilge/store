@@ -12,14 +12,18 @@ export type BasketItem = {
   name: string;
   price: number;
   src: string;
-  basketItemId?: string;
+  basketItemId: string;
   quantity: number;
+};
+
+export type BasketProduct = Omit<BasketItem, "basketItemId" | "quantity"> & {
+  quantity?: number;
 };
 
 type BasketContextType = {
   basket: BasketItem[];
-  addToBasket: (item: BasketItem) => void;
-  deleteItem: (itemId: any) => void;
+  addToBasket: (item: BasketProduct) => void;
+  deleteItem: (itemId: string) => void;
 };
 
 const BasketContext = createContext<BasketContextType | undefined>(undefined);
@@ -38,7 +42,7 @@ export const BasketProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("basket", JSON.stringify(basket));
   }, [basket]);
 
-  const addToBasket = (item: BasketItem) => {
+  const addToBasket = (item: BasketProduct) => {
     setBasket((prev) => {
       const existingItem = prev.find((p) => p.id === item.id);
 

@@ -5,12 +5,10 @@ import {
   UserIcon,
   UserGroupIcon,
   ShoppingCartIcon,
-  ClockIcon,
-  ShoppingBagIcon,
-  SparklesIcon,
-  FireIcon,
-  TrophyIcon,
 } from "@heroicons/react/24/outline";
+
+export type MegaMenuItem = { title: string; path: string };
+export type MegaMenuColumn = { title: string; items: MegaMenuItem[] };
 
 export const categories = [
   {

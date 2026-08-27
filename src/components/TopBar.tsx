@@ -13,10 +13,8 @@ import AllProducts from "./TopBarAllProducts";
 import { useBasket } from "@/context/BasketContext";
 import SearchInput from "./SearchInput";
 
-export default function () {
+export default function TopBar() {
   const [allKategori, setAllKategori] = useState(false);
-  // const { setSearchValue } = useSearch();
-  const [tempValue, setTempValue] = useState("");
   const { basket } = useBasket();
   const productNumber = basket.length;
   return (

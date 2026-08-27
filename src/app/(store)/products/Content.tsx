@@ -3,8 +3,9 @@ import { useState } from "react";
 
 import Card from "@/components/Card";
 import Pagination from "@/components/Pagination";
+import type { Product } from "@/data/products";
 
-export default function Content({ data }: any) {
+export default function Content({ data }: { data: Product[] }) {
   const ITEMS_PER_PAGE = 20;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);

@@ -17,9 +17,18 @@ export type SearchParams = {
   search?: string;
 };
 
-export default function Page({ searchParams }: { searchParams: SearchParams }) {
-  const searchValue = searchParams?.search || "";
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<SearchParams>;
+}) {
+  const resolvedSearchParams = await searchParams;
+  const searchValue = resolvedSearchParams.search || "";
   const query = normalize(searchValue);
 
-  return <Content data={searchFilteredData(products, searchParams, query)} />;
+  return (
+    <Content
+      data={searchFilteredData(products, resolvedSearchParams, query)}
+    />
+  );
 }

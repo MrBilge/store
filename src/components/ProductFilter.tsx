@@ -12,13 +12,27 @@ type ProductFilterProps = {
 export default function ProductFilter({ filters }: ProductFilterProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const priceParam = searchParams.get("price") || "";
+  const [initialMinPrice = "", initialMaxPrice = ""] = priceParam.split("-");
+  const [minPrice, setMinPrice] = useState(initialMinPrice);
+  const [maxPrice, setMaxPrice] = useState(initialMaxPrice);
+
+  useEffect(() => {
+    const [nextMinPrice = "", nextMaxPrice = ""] = priceParam.split("-");
+    setMinPrice(nextMinPrice);
+    setMaxPrice(nextMaxPrice);
+  }, [priceParam]);
 
   const getArray = (key: string) => searchParams.get(key)?.split(",") || [];
 
   const updateParams = (key: string, values: string[]) => {
     const params = new URLSearchParams(window.location.search);
 
-    values.length ? params.set(key, values.join(",")) : params.delete(key);
+    if (values.length) {
+      params.set(key, values.join(","));
+    } else {
+      params.delete(key);
+    }
 
     params.delete("page");
 
@@ -40,9 +54,23 @@ export default function ProductFilter({ filters }: ProductFilterProps) {
 
     const selected = searchParams.get(key);
 
-    selected === rate.toString()
-      ? params.delete(key)
-      : params.set(key, rate.toString());
+    if (selected === rate.toString()) {
+      params.delete(key);
+    } else {
+      params.set(key, rate.toString());
+    }
+
+    router.replace(`?${params.toString()}`, { scroll: false });
+  };
+
+  const handlePrice = () => {
+    const params = new URLSearchParams(window.location.search);
+
+    if (minPrice && maxPrice) {
+      params.set("price", `${minPrice}-${maxPrice}`);
+    } else {
+      params.delete("price");
+    }
 
     router.replace(`?${params.toString()}`, { scroll: false });
   };
@@ -74,30 +102,6 @@ export default function ProductFilter({ filters }: ProductFilterProps) {
 
         // PRICE
         if (filter.type === "price") {
-          const priceRange = searchParams.get("price")?.split("-") || ["", ""];
-
-          const [minPrice, setMinPrice] = useState(priceRange[0]);
-          const [maxPrice, setMaxPrice] = useState(priceRange[1]);
-
-          useEffect(() => {
-            setMinPrice(priceRange[0]);
-            setMaxPrice(priceRange[1]);
-          }, [searchParams]);
-
-          const handlePrice = () => {
-            const params = new URLSearchParams(window.location.search);
-
-            if (minPrice && maxPrice) {
-              params.set("price", `${minPrice}-${maxPrice}`);
-            } else {
-              params.delete("price");
-            }
-
-            router.replace(`?${params.toString()}`, {
-              scroll: false,
-            });
-          };
-
           return (
             <div key="price">
               <h3 className="font-semibold">Fiyat</h3>

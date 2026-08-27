@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { categories } from "@/data/categories";
 import MegaMenu from "./MegaMenu";
 
-export default function AllProducts({ setAllKategori }: any) {
+type AllProductsProps = {
+  setAllKategori: Dispatch<SetStateAction<boolean>>;
+};
+
+export default function AllProducts({ setAllKategori }: AllProductsProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>("Ev");
 
   const activeData = categories.find((cat) => cat.title === activeCategory);
@@ -38,7 +42,7 @@ export default function AllProducts({ setAllKategori }: any) {
       <div>
         {activeData && (
           <MegaMenu
-            data={activeData}
+            columns={"megaMenu" in activeData ? activeData.megaMenu : []}
             setAllKategori={setAllKategori}
             onMouseEnter={() => setActiveCategory(activeData.title)}
             onMouseLeave={() => setActiveCategory(null)}
