@@ -84,7 +84,7 @@ export default function MiniBasket({ show, setShow }: MiniBasketProps) {
           Ödeme Adımına Git
         </div>
 
-        <div className="flex justify-between items-center bg-black text-white p-5">
+        <div className="flex justify-between items-center bg-black/75 text-white p-5">
           <div className="text-sm">
             <p>Ara Toplam</p>
             <p>{formatPrice(productPrice)} TL</p>

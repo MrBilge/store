@@ -696,7 +696,7 @@ export const products: Product[] = productLeaves.flatMap((leaf) => {
     package: undefined,
     weight: undefined,
     rating: 3.5,
-    src: "/assets/dekoratif.jpg",
+    src: "/assets/demoProduct.png",
     category: leaf.category,
     subCategory: leaf.subCategory,
     subProduct: leaf.subProduct,
