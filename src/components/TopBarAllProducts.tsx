@@ -42,7 +42,9 @@ export default function AllProducts({ setAllKategori }: AllProductsProps) {
       <div>
         {activeData && (
           <MegaMenu
-            columns={"megaMenu" in activeData ? activeData.megaMenu : []}
+            columns={
+              "megaMenu" in activeData ? (activeData.megaMenu ?? []) : []
+            }
             setAllKategori={setAllKategori}
             onMouseEnter={() => setActiveCategory(activeData.title)}
             onMouseLeave={() => setActiveCategory(null)}
